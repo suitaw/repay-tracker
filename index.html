@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>还款作战地图</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0f;
+  --card: #14141f;
+  --card2: #1a1a2a;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --text2: #8888aa;
+  --green: #00e676;
+  --green2: #00c853;
+  --red: #ff5252;
+  --orange: #ffab40;
+  --yellow: #ffd740;
+  --blue: #448aff;
+  --purple: #b388ff;
+}
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+  backdrop-filter: blur(20px);
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat-box {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text2);
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.stat-value.total { color: var(--text); }
+.stat-value.paid { color: var(--green); }
+.stat-value.remain { color: var(--orange); }
+.stat-value.month { color: var(--yellow); }
+
+.progress-wrap {
+  margin-top: 10px;
+  grid-column: 1 / -1;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--card2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+.milestones {
+  padding: 12px 16px;
+}
+
+.milestone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--card);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  transition: all 0.3s;
+}
+
+.milestone.done {
+  opacity: 0.4;
+  text-decoration: line-through;
+  border-color: var(--green);
+}
+
+.milestone .icon { font-size: 16px; }
+.milestone .date { color: var(--text2); margin-left: auto; font-size: 12px; }
+
+.section {
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: sticky;
+  top: 140px;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.section-title .badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.badge-red { background: rgba(255,82,82,0.2); color: var(--red); }
+.badge-orange { background: rgba(255,171,64,0.2); color: var(--orange); }
+.badge-green { background: rgba(0,230,118,0.2); color: var(--green); }
+
+.week-card {
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.week-header {
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card2);
+  border-bottom: 1px solid var(--border);
+}
+
+.week-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.week-total {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.week-total.high { color: var(--red); }
+.week-total.mid { color: var(--orange); }
+.week-total.low { color: var(--green); }
+
+.pay-item {
+  display: flex;
+  align-items: center;
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s;
+  gap: 10px;
+}
+
+.pay-item:last-child { border-bottom: none; }
+
+.pay-item.checked {
+  opacity: 0.35;
+}
+
+.pay-item.checked .pay-amount {
+  text-decoration: line-through;
+}
+
+.pay-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pay-check.checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.pay-check.checked::after {
+  content: '✓';
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pay-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pay-date {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.pay-source {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 1px;
+}
+
+.pay-amount {
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.source-360 { color: var(--blue); }
+.source-apple { color: #ff6b9d; }
+.source-jd { color: var(--orange); }
+.source-oneplus { color: var(--red); }
+.source-meituan { color: var(--yellow); }
+
+.tag {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.tag-last { background: rgba(0,230,118,0.15); color: var(--green); }
+.tag-hot { background: rgba(255,82,82,0.15); color: var(--red); }
+
+.reset-btn {
+  display: block;
+  margin: 30px auto;
+  padding: 12px 30px;
+  background: rgba(255,82,82,0.1);
+  color: var(--red);
+  border: 1px solid rgba(255,82,82,0.3);
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.nav-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: sticky;
+  top: 158px;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-bar::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: #000;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.nav-btn .nav-amt {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+.top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: #000;
+  font-size: 20px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 200;
+  box-shadow: 0 4px 15px rgba(0,230,118,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateY(20px);
+}
+
+.top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="header" id="header">
+  <h1>💳 还款作战地图</h1>
+  <div class="stats">
+    <div class="stat-box">
+      <div class="stat-label">剩余待还</div>
+      <div class="stat-value remain" id="remainTotal">--</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">已还金额</div>
+      <div class="stat-value paid" id="paidTotal">--</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">本月待还</div>
+      <div class="stat-value month" id="monthRemain">--</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">已还笔数</div>
+      <div class="stat-value total" id="paidCount">--</div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text">
+        <span id="progressPct">0%</span>
+        <span id="progressLabel">0/0 笔</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-bar" id="navBar"></div>
+<div class="milestones" id="milestones"></div>
+<div id="content"></div>
+<button class="reset-btn" onclick="resetAll()">重置所有勾选</button>
+<div class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+const DATA = [
+  {d:"2026-04-14",amt:179.88,src:"360借条"},
+  {d:"2026-04-15",amt:175.35,src:"360借条"},
+  {d:"2026-04-15",amt:219.92,src:"一加分期",tag:"倒数第2期"},
+  {d:"2026-04-17",amt:94.54,src:"360借条"},
+  {d:"2026-04-17",amt:207.98,src:"美团"},
+  {d:"2026-04-20",amt:208.04,src:"360借条"},
+  {d:"2026-04-22",amt:236.34,src:"360借条"},
+  {d:"2026-04-28",amt:132.35,src:"360借条"},
+  {d:"2026-04-28",amt:255.29,src:"京东白条"},
+  {d:"2026-05-01",amt:425.36,src:"360借条"},
+  {d:"2026-05-02",amt:189.07,src:"360借条"},
+  {d:"2026-05-03",amt:96.24,src:"360借条"},
+  {d:"2026-05-03",amt:767.00,src:"苹果分期",tag:"最后一期"},
+  {d:"2026-05-05",amt:47.27,src:"360借条"},
+  {d:"2026-05-08",amt:98.00,src:"360借条"},
+  {d:"2026-05-13",amt:147.57,src:"360借条"},
+  {d:"2026-05-14",amt:177.02,src:"360借条"},
+  {d:"2026-05-15",amt:66.17,src:"360借条"},
+  {d:"2026-05-15",amt:219.86,src:"一加分期",tag:"最后一期"},
+  {d:"2026-05-17",amt:94.54,src:"360借条"},
+  {d:"2026-05-17",amt:207.89,src:"美团"},
+  {d:"2026-05-20",amt:208.04,src:"360借条"},
+  {d:"2026-05-22",amt:236.34,src:"360借条"},
+  {d:"2026-05-28",amt:132.35,src:"360借条"},
+  {d:"2026-05-28",amt:255.29,src:"京东白条"},
+  {d:"2026-06-01",amt:378.13,src:"360借条"},
+  {d:"2026-06-02",amt:189.07,src:"360借条"},
+  {d:"2026-06-03",amt:95.95,src:"360借条"},
+  {d:"2026-06-05",amt:47.27,src:"360借条"},
+  {d:"2026-06-13",amt:146.33,src:"360借条"},
+  {d:"2026-06-14",amt:174.81,src:"360借条"},
+  {d:"2026-06-15",amt:66.17,src:"360借条"},
+  {d:"2026-06-17",amt:94.54,src:"360借条"},
+  {d:"2026-06-17",amt:103.97,src:"美团"},
+  {d:"2026-06-20",amt:208.04,src:"360借条"},
+  {d:"2026-06-22",amt:236.34,src:"360借条"},
+  {d:"2026-06-28",amt:132.31,src:"360借条"},
+  {d:"2026-06-28",amt:219.45,src:"京东白条"},
+  {d:"2026-07-01",amt:378.13,src:"360借条"},
+  {d:"2026-07-02",amt:189.07,src:"360借条"},
+  {d:"2026-07-03",amt:95.17,src:"360借条"},
+  {d:"2026-07-05",amt:47.27,src:"360借条"},
+  {d:"2026-07-13",amt:143.95,src:"360借条"},
+  {d:"2026-07-14",amt:172.17,src:"360借条"},
+  {d:"2026-07-15",amt:66.21,src:"360借条"},
+  {d:"2026-07-17",amt:94.54,src:"360借条"},
+  {d:"2026-07-17",amt:47.20,src:"美团",tag:"最后一期"},
+  {d:"2026-07-22",amt:236.34,src:"360借条"},
+  {d:"2026-07-28",amt:189.08,src:"京东白条"},
+  {d:"2026-08-01",amt:236.33,src:"360借条"},
+  {d:"2026-08-02",amt:189.03,src:"360借条"},
+  {d:"2026-08-03",amt:94.83,src:"360借条"},
+  {d:"2026-08-05",amt:47.27,src:"360借条"},
+  {d:"2026-08-13",amt:142.56,src:"360借条"},
+  {d:"2026-08-17",amt:94.50,src:"360借条"},
+  {d:"2026-08-22",amt:236.34,src:"360借条"},
+  {d:"2026-08-28",amt:167.07,src:"京东白条"},
+  {d:"2026-09-01",amt:236.37,src:"360借条"},
+  {d:"2026-09-03",amt:94.25,src:"360借条"},
+  {d:"2026-09-05",amt:47.27,src:"360借条"},
+  {d:"2026-09-13",amt:140.68,src:"360借条"},
+  {d:"2026-09-17",amt:47.23,src:"360借条"},
+  {d:"2026-09-22",amt:236.34,src:"360借条"},
+  {d:"2026-09-28",amt:148.11,src:"京东白条"},
+  {d:"2026-10-01",amt:141.80,src:"360借条"},
+  {d:"2026-10-03",amt:93.54,src:"360借条"},
+  {d:"2026-10-05",amt:47.27,src:"360借条"},
+  {d:"2026-10-13",amt:138.46,src:"360借条"},
+  {d:"2026-10-22",amt:236.26,src:"360借条"},
+  {d:"2026-10-28",amt:129.37,src:"京东白条"},
+  {d:"2026-11-01",amt:141.80,src:"360借条"},
+  {d:"2026-11-03",amt:93.11,src:"360借条"},
+  {d:"2026-11-05",amt:47.27,src:"360借条"},
+  {d:"2026-11-13",amt:136.85,src:"360借条"},
+  {d:"2026-11-28",amt:110.41,src:"京东白条"},
+  {d:"2026-12-01",amt:141.80,src:"360借条"},
+  {d:"2026-12-03",amt:92.45,src:"360借条"},
+  {d:"2026-12-05",amt:47.27,src:"360借条"},
+  {d:"2026-12-13",amt:134.74,src:"360借条"},
+  {d:"2026-12-28",amt:66.04,src:"京东白条"},
+  {d:"2027-01-01",amt:141.80,src:"360借条"},
+  {d:"2027-01-03",amt:91.94,src:"360借条"},
+  {d:"2027-01-05",amt:47.27,src:"360借条"},
+  {d:"2027-01-13",amt:133.00,src:"360借条"},
+  {d:"2027-01-28",amt:24.85,src:"京东白条"},
+  {d:"2027-02-01",amt:141.80,src:"360借条"},
+  {d:"2027-02-03",amt:91.36,src:"360借条"},
+  {d:"2027-02-05",amt:47.27,src:"360借条"},
+  {d:"2027-02-13",amt:131.39,src:"360借条"},
+  {d:"2027-02-28",amt:12.05,src:"京东白条",tag:"最后一期"},
+  {d:"2027-03-01",amt:141.80,src:"360借条"},
+  {d:"2027-03-03",amt:47.27,src:"360借条"},
+  {d:"2027-03-05",amt:47.27,src:"360借条"},
+  {d:"2027-04-01",amt:141.80,src:"360借条"},
+  {d:"2027-04-03",amt:47.23,src:"360借条"},
+  {d:"2027-04-05",amt:47.23,src:"360借条",tag:"全部结清"}
+];
+
+const WEEKDAYS = ['周日','周一','周二','周三','周四','周五','周六'];
+const SRC_CLASS = {'360借条':'source-360','苹果分期':'source-apple','京东白条':'source-jd','一加分期':'source-oneplus','美团':'source-meituan'};
+
+const MILESTONES = [
+  {d:"2026-05-03",icon:"🍎",text:"苹果分期结清"},
+  {d:"2026-05-15",icon:"📱",text:"一加分期结清"},
+  {d:"2026-07-17",icon:"🍜",text:"美团结清"},
+  {d:"2027-02-28",icon:"💳",text:"京东白条结清"},
+  {d:"2027-04-05",icon:"🎉",text:"全部归零！"}
+];
+
+let checked = {};
+try { checked = JSON.parse(localStorage.getItem('repay_checked') || '{}'); } catch(e) {}
+
+function save() { localStorage.setItem('repay_checked', JSON.stringify(checked)); }
+
+function getWeekStart(dateStr) {
+  const d = new Date(dateStr);
+  const wd = d.getDay();
+  const diff = (wd < 4) ? -(wd + 3) : -(wd - 4);
+  const start = new Date(d);
+  start.setDate(start.getDate() + diff);
+  return start.toISOString().slice(0,10);
+}
+
+function formatMD(dateStr) {
+  const [y,m,d] = dateStr.split('-');
+  return `${parseInt(m)}/${parseInt(d)}`;
+}
+
+function getMonth(dateStr) {
+  const [y,m] = dateStr.split('-');
+  return `${y}-${m}`;
+}
+
+function toggle(id) {
+  checked[id] = !checked[id];
+  save();
+  updateUI();
+}
+
+function resetAll() {
+  if(confirm('确定要重置所有勾选吗？')) {
+    checked = {};
+    save();
+    updateUI();
+  }
+}
+
+function updateUI() {
+  const totalAmt = DATA.reduce((s,d) => s + d.amt, 0);
+  let paidAmt = 0, paidCnt = 0;
+  DATA.forEach((d,i) => {
+    if(checked[i]) { paidAmt += d.amt; paidCnt++; }
+  });
+  const remainAmt = totalAmt - paidAmt;
+  
+  const now = new Date();
+  const curMonth = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  let monthRemain = 0;
+  DATA.forEach((d,i) => {
+    if(getMonth(d.d) === curMonth && !checked[i]) monthRemain += d.amt;
+  });
+
+  document.getElementById('remainTotal').textContent = '¥' + remainAmt.toFixed(0);
+  document.getElementById('paidTotal').textContent = '¥' + paidAmt.toFixed(0);
+  document.getElementById('monthRemain').textContent = '¥' + monthRemain.toFixed(0);
+  document.getElementById('paidCount').textContent = `${paidCnt}/${DATA.length}`;
+  
+  const pct = (paidAmt / totalAmt * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct.toFixed(1) + '%';
+  document.getElementById('progressLabel').textContent = `${paidCnt}/${DATA.length} 笔`;
+
+  // Update milestones
+  const mlEl = document.getElementById('milestones');
+  mlEl.innerHTML = MILESTONES.map(m => {
+    const relItems = DATA.filter(d => {
+      if(m.text.includes('苹果')) return d.src === '苹果分期';
+      if(m.text.includes('一加')) return d.src === '一加分期';
+      if(m.text.includes('美团')) return d.src === '美团';
+      if(m.text.includes('白条')) return d.src === '京东白条';
+      if(m.text.includes('全部')) return true;
+      return false;
+    });
+    const allDone = relItems.every((d,_) => checked[DATA.indexOf(d)]);
+    return `<div class="milestone ${allDone?'done':''}">
+      <span class="icon">${m.icon}</span>
+      <span>${m.text}</span>
+      <span class="date">${formatMD(m.d)}</span>
+    </div>`;
+  }).join('');
+
+  // Update check marks
+  DATA.forEach((d,i) => {
+    const el = document.getElementById('check-'+i);
+    const row = document.getElementById('row-'+i);
+    if(el && row) {
+      el.className = 'pay-check' + (checked[i] ? ' checked' : '');
+      row.className = 'pay-item' + (checked[i] ? ' checked' : '');
+    }
+  });
+
+  // Update week totals
+  document.querySelectorAll('.week-total').forEach(el => {
+    const weekKey = el.dataset.week;
+    let weekRemain = 0;
+    DATA.forEach((d,i) => {
+      if(getWeekStart(d.d) === weekKey && !checked[i]) weekRemain += d.amt;
+    });
+    el.textContent = '¥' + weekRemain.toFixed(0);
+    el.className = 'week-total' + (weekRemain > 800 ? ' high' : weekRemain > 400 ? ' mid' : ' low');
+  });
+}
+
+function render() {
+  const weeks = {};
+  const monthMap = {};
+  
+  DATA.forEach((d,i) => {
+    const wk = getWeekStart(d.d);
+    if(!weeks[wk]) weeks[wk] = [];
+    weeks[wk].push({...d, idx: i});
+    
+    const m = getMonth(d.d);
+    if(!monthMap[m]) monthMap[m] = [];
+    if(!monthMap[m].includes(wk)) monthMap[m].push(wk);
+  });
+
+  const content = document.getElementById('content');
+  let html = '';
+  
+  const monthNames = Object.keys(monthMap).sort();
+  
+  monthNames.forEach(monthKey => {
+    const [y,m] = monthKey.split('-');
+    const yr = y === '2027' ? '2027年' : '';
+    const monthLabel = `${yr}${parseInt(m)}月`;
+    
+    const monthTotal = DATA.filter(d => getMonth(d.d) === monthKey).reduce((s,d) => s+d.amt, 0);
+    
+    let badgeClass = 'badge-green';
+    if(monthTotal > 2000) badgeClass = 'badge-red';
+    else if(monthTotal > 1000) badgeClass = 'badge-orange';
+    
+    html += `<div class="section" id="month-${monthKey}">`;    html += `<div class="section-title">${monthLabel} <span class="badge ${badgeClass}">¥${monthTotal.toFixed(0)}</span></div>`;
+    
+    monthMap[monthKey].sort().forEach(weekKey => {
+      const items = weeks[weekKey];
+      const weekEnd = new Date(weekKey);
+      weekEnd.setDate(weekEnd.getDate() + 6);
+      const weekEndStr = weekEnd.toISOString().slice(0,10);
+      const weekTotal = items.reduce((s,d) => s+d.amt, 0);
+      
+      html += `<div class="week-card">`;
+      html += `<div class="week-header">
+        <span class="week-label">${formatMD(weekKey)} — ${formatMD(weekEndStr)}</span>
+        <span class="week-total ${weekTotal>800?'high':weekTotal>400?'mid':'low'}" data-week="${weekKey}">¥${weekTotal.toFixed(0)}</span>
+      </div>`;
+      
+      items.forEach(item => {
+        const dt = new Date(item.d);
+        const wd = WEEKDAYS[dt.getDay()];
+        const isChecked = checked[item.idx];
+        const srcClass = SRC_CLASS[item.src] || '';
+        let tagHtml = '';
+        if(item.tag) {
+          const tc = item.tag.includes('最后') || item.tag.includes('结清') ? 'tag-last' : 'tag-hot';
+          tagHtml = `<span class="tag ${tc}">${item.tag}</span>`;
+        }
+        
+        html += `<div class="pay-item ${isChecked?'checked':''}" id="row-${item.idx}" onclick="toggle(${item.idx})">
+          <div class="pay-check ${isChecked?'checked':''}" id="check-${item.idx}"></div>
+          <div class="pay-info">
+            <div class="pay-date">${formatMD(item.d)} ${wd}</div>
+            <div class="pay-source">${item.src}${tagHtml}</div>
+          </div>
+          <div class="pay-amount ${srcClass}">¥${item.amt.toFixed(2)}</div>
+        </div>`;
+      });
+      
+      html += `</div>`;
+    });
+    
+    html += `</div>`;
+  });
+  
+  content.innerHTML = html;
+  
+  // Build nav bar
+  const navBar = document.getElementById('navBar');
+  navBar.innerHTML = monthNames.map(mk => {
+    const [y,m] = mk.split('-');
+    const yr = y === '2027' ? "'27 " : '';
+    const label = `${yr}${parseInt(m)}月`;
+    return `<button class="nav-btn" data-month="${mk}" onclick="scrollToMonth('${mk}')">${label}</button>`;
+  }).join('');
+  
+  updateUI();
+  updateActiveNav();
+}
+
+function scrollToMonth(monthKey) {
+  const el = document.getElementById('month-' + monthKey);
+  if(el) {
+    const headerH = document.getElementById('header').offsetHeight;
+    const navH = document.getElementById('navBar').offsetHeight;
+    const offset = headerH + navH + 10;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+function updateActiveNav() {
+  const btns = document.querySelectorAll('.nav-btn');
+  const headerH = document.getElementById('header').offsetHeight;
+  const navH = document.getElementById('navBar').offsetHeight;
+  const offset = headerH + navH + 60;
+  
+  let activeMonth = null;
+  document.querySelectorAll('.section[id^="month-"]').forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if(rect.top < offset + 100) {
+      activeMonth = sec.id.replace('month-','');
+    }
+  });
+  
+  btns.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.month === activeMonth);
+  });
+  
+  // Auto scroll nav to active button
+  const activeBtn = document.querySelector('.nav-btn.active');
+  if(activeBtn) {
+    const nav = document.getElementById('navBar');
+    const btnLeft = activeBtn.offsetLeft;
+    const btnW = activeBtn.offsetWidth;
+    const navW = nav.offsetWidth;
+    nav.scrollTo({ left: btnLeft - navW/2 + btnW/2, behavior: 'smooth' });
+  }
+}
+
+let scrollTimer;
+window.addEventListener('scroll', () => {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(updateActiveNav, 50);
+  const topBtn = document.getElementById('topBtn');
+  topBtn.classList.toggle('show', window.scrollY > 400);
+});
+
+render();
+</script>
+</body>
+</html>
