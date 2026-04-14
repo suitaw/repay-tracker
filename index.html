@@ -7,305 +7,128 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>PAYOFF</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#0a0a0a;
-  --bg2:#111;
-  --surface:#1a1a1a;
-  --border:#2a2a2a;
-  --yellow:#ffc800;
-  --yellow2:#e8b600;
-  --yellow-dark:#1a1600;
-  --text-on-yellow:#0a0a00;
+  --bg:#080808;
+  --y:#ffc800;
+  --y2:#ffdb4d;
+  --y3:#e8b600;
+  --yd:#1a1500;
+  --onY:#0a0800;
+  --onY2:rgba(10,8,0,0.5);
   --text:#f0ece4;
-  --text2:#888;
-  --text3:#555;
+  --text2:#777;
+  --text3:#444;
   --c360:#ff8c2e;
   --cjd:#e83030;
-  --cmeituan:#ffc107;
-  --cgreen:#4caf50;
-  --radius:14px;
+  --cmt:#ffc107;
+  --cg:#4caf50;
+  --r:14px;
 }
-
 body{
-  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  font-family:'DM Sans',system-ui,sans-serif;
   background:var(--bg);color:var(--text);
-  min-height:100vh;padding-bottom:120px;
-  font-size:15px;line-height:1.5;
-  background-image:
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 40px,
-      rgba(255,200,0,0.03) 40px,
-      rgba(255,200,0,0.03) 41px
-    );
+  min-height:100vh;padding-bottom:120px;font-size:15px;line-height:1.5;
+  background-image:repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(255,200,0,0.05) 30px,rgba(255,200,0,0.05) 31.5px);
   background-attachment:fixed;
 }
 
-/* === HEADER === */
-.header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(10,10,10,0.92);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:2px solid var(--yellow);
-  padding:16px 20px 14px;
-}
+.hd{position:sticky;top:0;z-index:100;background:rgba(8,8,8,0.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:2px solid var(--y);padding:14px 16px 12px}
+.brand{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--y);text-align:center;margin-bottom:12px}
 
-.brand{
-  font-family:'DM Mono',monospace;
-  font-size:11px;font-weight:500;
-  letter-spacing:5px;text-transform:uppercase;
-  color:var(--yellow);text-align:center;
-  margin-bottom:14px;
-}
+.hero{background:var(--y);border-radius:16px;padding:22px 16px;text-align:center;margin-bottom:10px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(0,0,0,0.04) 10px,rgba(0,0,0,0.04) 11.5px);pointer-events:none}
+.hero-n{font-family:'DM Mono',monospace;font-size:48px;font-weight:800;letter-spacing:-2px;color:var(--onY);line-height:1;position:relative}
+.hero-n .u{font-size:24px;font-weight:500;opacity:.5;margin-right:2px}
+.hero-l{font-size:11px;color:var(--onY2);margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700;position:relative}
 
-/* Hero card */
-.hero-card{
-  background:var(--yellow);
-  border-radius:16px;
-  padding:20px 16px;
-  text-align:center;
-  margin-bottom:12px;
-  position:relative;
-  overflow:hidden;
-}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+.box{background:var(--y);border-radius:12px;padding:12px 6px;text-align:center;position:relative;overflow:hidden}
+.box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 7px,rgba(0,0,0,0.03) 7px,rgba(0,0,0,0.03) 8.5px);pointer-events:none}
+.box-v{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--onY);position:relative}
+.box-l{font-size:10px;color:var(--onY2);margin-top:2px;font-weight:600;position:relative}
 
-.hero-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background:repeating-linear-gradient(
-    -45deg,transparent,transparent 8px,
-    rgba(0,0,0,0.04) 8px,rgba(0,0,0,0.04) 9px
-  );
-  pointer-events:none;
-}
+.pw{background:var(--y);border-radius:10px;padding:10px 14px;position:relative;overflow:hidden}
+.pw::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 7px,rgba(0,0,0,0.03) 7px,rgba(0,0,0,0.03) 8.5px);pointer-events:none}
+.pb{height:6px;background:rgba(0,0,0,0.12);border-radius:3px;overflow:hidden;position:relative}
+.pbf{height:100%;background:var(--onY);border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.pi{display:flex;justify-content:space-between;margin-top:5px;font-family:'DM Mono',monospace;font-size:11px;color:var(--onY2);position:relative}
 
-.hero-amt{
-  font-family:'DM Mono',monospace;
-  font-size:46px;font-weight:800;
-  letter-spacing:-2px;
-  color:var(--text-on-yellow);
-  line-height:1;position:relative;
-}
+.nv{display:flex;gap:5px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;position:sticky;top:210px;z-index:50;background:rgba(8,8,8,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #1a1a1a}
+.nv::-webkit-scrollbar{display:none}
+.ni{flex-shrink:0;padding:7px 18px;border-radius:100px;border:none;background:#181818;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.ni.on{background:var(--y);color:var(--onY)}
 
-.hero-amt .yen{font-size:26px;font-weight:500;margin-right:2px;opacity:0.6}
+.mls{padding:10px 16px 4px}
+.ml{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--y);border-radius:12px;margin-bottom:6px;transition:all .3s;position:relative;overflow:hidden}
+.ml::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 7px,rgba(0,0,0,0.03) 7px,rgba(0,0,0,0.03) 8.5px);pointer-events:none}
+.ml.dn{background:#181818;border:1px solid #222}
+.ml.dn::before{display:none}
+.ml.dn .mlt{color:var(--text3);text-decoration:line-through}
+.ml.dn .mld{color:var(--text3)}
+.mli{font-size:16px;flex-shrink:0;position:relative}
+.mlt{flex:1;font-size:13px;font-weight:700;color:var(--onY);position:relative}
+.mld{font-family:'DM Mono',monospace;font-size:12px;color:var(--onY2);position:relative}
 
-.hero-lbl{
-  font-size:11px;color:rgba(10,10,0,0.5);
-  margin-top:6px;letter-spacing:2px;
-  text-transform:uppercase;font-weight:600;
-  position:relative;
-}
+.sec{padding:0 16px;margin-bottom:4px}
+.sh{display:flex;align-items:baseline;gap:10px;padding:20px 0 10px;position:sticky;top:252px;background:var(--bg);z-index:10;background-image:repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(255,200,0,0.05) 30px,rgba(255,200,0,0.05) 31.5px)}
+.sm{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.st2{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--onY);background:var(--y);padding:3px 12px;border-radius:100px}
 
-/* Stats */
-.stats{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:8px;margin-bottom:12px;
-}
+.wk{background:var(--y);border-radius:var(--r);margin-bottom:10px;overflow:hidden;position:relative}
+.wk::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(0,0,0,0.025) 10px,rgba(0,0,0,0.025) 11.5px);pointer-events:none;z-index:1}
+.wkh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(0,0,0,0.08);position:relative;z-index:2}
+.wkr{font-size:13px;color:var(--onY2);font-weight:700}
+.wka{font-family:'DM Mono',monospace;font-size:15px;font-weight:800;color:var(--onY)}
 
-.st{
-  background:var(--yellow);
-  border-radius:12px;padding:12px 8px;text-align:center;
-  position:relative;overflow:hidden;
-}
-
-.st::before{
-  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background:repeating-linear-gradient(
-    -45deg,transparent,transparent 6px,
-    rgba(0,0,0,0.03) 6px,rgba(0,0,0,0.03) 7px
-  );pointer-events:none;
-}
-
-.st-v{
-  font-family:'DM Mono',monospace;
-  font-size:18px;font-weight:700;
-  color:var(--text-on-yellow);position:relative;
-}
-
-.st-l{
-  font-size:10px;color:rgba(10,10,0,0.45);
-  margin-top:2px;letter-spacing:0.5px;
-  font-weight:600;position:relative;
-}
-
-/* Progress */
-.prog-wrap{
-  background:var(--surface);border-radius:10px;
-  padding:10px 14px;border:1px solid var(--border);
-}
-.prog{height:6px;background:#222;border-radius:3px;overflow:hidden}
-.prog-bar{height:100%;background:var(--yellow);border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-.prog-info{
-  display:flex;justify-content:space-between;margin-top:6px;
-  font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);
-}
-
-/* === NAV === */
-.nav{
-  display:flex;gap:4px;padding:10px 20px;overflow-x:auto;scrollbar-width:none;
-  position:sticky;top:218px;z-index:50;
-  background:rgba(10,10,10,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-}
-.nav::-webkit-scrollbar{display:none}
-.nav-i{
-  flex-shrink:0;padding:7px 18px;border-radius:100px;
-  border:1px solid var(--border);background:transparent;
-  color:var(--text3);font-family:'DM Sans',sans-serif;
-  font-size:13px;font-weight:600;cursor:pointer;
-  transition:all .2s;white-space:nowrap;
-}
-.nav-i.active{
-  background:var(--yellow);color:var(--text-on-yellow);
-  border-color:var(--yellow);font-weight:800;
-}
-
-/* === MILESTONES === */
-.mls{padding:10px 20px 4px}
-.ml{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 14px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;margin-bottom:6px;transition:all .3s;
-}
-.ml.done{
-  background:var(--yellow);border-color:var(--yellow);
-}
-.ml.done .ml-t{color:var(--text-on-yellow);text-decoration:line-through;opacity:0.6}
-.ml.done .ml-d{color:rgba(10,10,0,0.4)}
-.ml-i{font-size:16px;flex-shrink:0}
-.ml-t{flex:1;font-size:13px;font-weight:600;color:var(--text)}
-.ml-d{font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)}
-
-/* === SECTION === */
-.sec{padding:0 20px;margin-bottom:4px}
-.sec-h{
-  display:flex;align-items:baseline;gap:10px;
-  padding:20px 0 10px;
-  position:sticky;top:260px;background:var(--bg);z-index:10;
-  background-image:repeating-linear-gradient(
-    -45deg,transparent,transparent 40px,
-    rgba(255,200,0,0.03) 40px,rgba(255,200,0,0.03) 41px
-  );
-}
-.sec-m{font-size:24px;font-weight:800;letter-spacing:-0.5px;color:var(--text)}
-.sec-t{
-  font-family:'DM Mono',monospace;font-size:13px;font-weight:700;
-  color:var(--text-on-yellow);background:var(--yellow);
-  padding:3px 12px;border-radius:100px;
-}
-
-/* === WEEK === */
-.wk{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);margin-bottom:10px;overflow:hidden;
-}
-.wk-h{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 16px;border-bottom:1px solid var(--border);
-  background:rgba(255,255,255,0.02);
-}
-.wk-r{font-size:13px;color:var(--text2);font-weight:600}
-.wk-a{font-family:'DM Mono',monospace;font-size:14px;font-weight:700}
-.wk-a.hi{color:#ef5350}.wk-a.mi{color:var(--yellow)}.wk-a.lo{color:var(--cgreen)}
-
-/* === ITEM === */
-.it{
-  display:flex;align-items:center;padding:13px 16px;gap:12px;
-  border-bottom:1px solid #1f1f1f;
-  transition:all .25s;cursor:pointer;-webkit-user-select:none;user-select:none;
-}
+.it{display:flex;align-items:center;padding:12px 16px;gap:12px;border-bottom:1px solid rgba(0,0,0,0.06);transition:all .2s;cursor:pointer;-webkit-user-select:none;user-select:none;position:relative;z-index:2}
 .it:last-child{border-bottom:none}
-.it:active{background:rgba(255,200,0,0.04)}
-.it.dn{opacity:.25}
-.it.dn .it-a{text-decoration:line-through}
+.it:active{background:rgba(0,0,0,0.06)}
+.it.dn{opacity:.3}
+.it.dn .ia{text-decoration:line-through}
 
-.ck{
-  width:24px;height:24px;border-radius:50%;
-  border:2px solid #333;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.ck.on{border-color:var(--yellow);background:var(--yellow)}
-.ck.on::after{
-  content:'';width:6px;height:10px;
-  border:solid var(--text-on-yellow);border-width:0 2.5px 2.5px 0;
-  transform:rotate(45deg);margin-top:-2px;
-}
+.ck{width:24px;height:24px;border-radius:50%;border:2.5px solid rgba(0,0,0,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;background:rgba(255,255,255,0.3)}
+.ck.on{border-color:var(--onY);background:var(--onY)}
+.ck.on::after{content:'';width:6px;height:10px;border:solid var(--y);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);margin-top:-2px}
 
-.it-b{flex:1;min-width:0}
-.it-top{display:flex;align-items:center;gap:6px}
-.it-dt{font-size:14px;font-weight:700}
-.it-dy{font-size:12px;color:var(--text3);font-weight:500}
+.ib{flex:1;min-width:0}
+.itp{display:flex;align-items:center;gap:6px}
+.idt{font-size:14px;font-weight:700;color:var(--onY)}
+.idy{font-size:12px;color:var(--onY2);font-weight:600}
+.itg{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:700;letter-spacing:.3px}
+.te{background:rgba(76,175,80,0.25);color:#2e7d32}
+.tf{background:rgba(230,60,60,0.2);color:#c62828}
 
-.it-tag{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:700;letter-spacing:.3px}
-.tg-end{background:rgba(76,175,80,0.2);color:var(--cgreen)}
-.tg-fire{background:rgba(239,83,80,0.2);color:#ef5350}
+.is{font-size:12px;color:var(--onY2);margin-top:2px;display:flex;align-items:center;gap:5px;font-weight:600}
+.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.d1{background:var(--c360)}.d2{background:var(--cg)}.d3{background:var(--cjd)}.d4{background:var(--cmt)}
 
-.it-s{font-size:12px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:5px;font-weight:500}
-.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.d360{background:var(--c360)}
-.dapple{background:var(--cgreen)}
-.djd{background:var(--cjd)}
-.done1{background:var(--cgreen)}
-.dmeituan{background:var(--cmeituan)}
+.ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;flex-shrink:0}
+.a1{color:var(--c360)}.a2{color:var(--cg)}.a3{color:var(--cjd)}.a4{color:var(--cmt)}
 
-.it-a{
-  font-family:'DM Mono',monospace;font-size:16px;font-weight:700;flex-shrink:0;
-}
-.a360{color:var(--c360)}
-.aapple{color:var(--cgreen)}
-.ajd{color:var(--cjd)}
-.aone{color:var(--cgreen)}
-.ameituan{color:var(--cmeituan)}
-
-/* === BUTTONS === */
-.rst{
-  display:block;margin:40px auto 20px;padding:13px 32px;
-  background:transparent;color:var(--text3);
-  border:1px solid var(--border);border-radius:100px;
-  font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;
-}
-
-.top{
-  position:fixed;bottom:28px;right:20px;width:48px;height:48px;
-  border-radius:50%;background:var(--yellow);color:var(--text-on-yellow);
-  font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;z-index:200;
-  box-shadow:0 4px 24px rgba(255,200,0,0.25);
-  opacity:0;pointer-events:none;transition:all .3s;border:none;
-}
+.rst{display:block;margin:40px auto 20px;padding:13px 32px;background:transparent;color:var(--text3);border:1px solid #222;border-radius:100px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
+.top{position:fixed;bottom:28px;right:20px;width:48px;height:48px;border-radius:50%;background:var(--y);color:var(--onY);font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;box-shadow:0 4px 24px rgba(255,200,0,0.3);opacity:0;pointer-events:none;transition:all .3s;border:none}
 .top.show{opacity:1;pointer-events:auto}
 </style>
 </head>
 <body>
-
-<div class="header" id="hd">
-  <div class="brand">Payoff</div>
-  <div class="hero-card">
-    <div class="hero-amt"><span class="yen">¥</span><span id="hAmt">0</span></div>
-    <div class="hero-lbl">剩余待还</div>
-  </div>
-  <div class="stats">
-    <div class="st"><div class="st-v" id="sP">¥0</div><div class="st-l">已还</div></div>
-    <div class="st"><div class="st-v" id="sM">¥0</div><div class="st-l">本月</div></div>
-    <div class="st"><div class="st-v" id="sC">0/96</div><div class="st-l">进度</div></div>
-  </div>
-  <div class="prog-wrap">
-    <div class="prog"><div class="prog-bar" id="pB"></div></div>
-    <div class="prog-info"><span id="pP">0%</span><span id="pL">0/96</span></div>
-  </div>
+<div class="hd" id="hd">
+<div class="brand">Payoff</div>
+<div class="hero"><div class="hero-n"><span class="u">¥</span><span id="hA">0</span></div><div class="hero-l">剩余待还</div></div>
+<div class="row">
+<div class="box"><div class="box-v" id="sP">¥0</div><div class="box-l">已还</div></div>
+<div class="box"><div class="box-v" id="sM">¥0</div><div class="box-l">本月</div></div>
+<div class="box"><div class="box-v" id="sC">0</div><div class="box-l">进度</div></div>
 </div>
-
-<div class="nav" id="nv"></div>
+<div class="pw"><div class="pb"><div class="pbf" id="pB"></div></div><div class="pi"><span id="pP">0%</span><span id="pL">0/0</span></div></div>
+</div>
+<div class="nv" id="nv"></div>
 <div class="mls" id="ms"></div>
 <div id="app"></div>
 <button class="rst" onclick="resetAll()">重置所有记录</button>
 <button class="top" id="tp" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 <script>
 const D=[
 {d:"2026-04-14",a:179.88,s:"360借条"},
@@ -325,6 +148,7 @@ const D=[
 {d:"2026-05-08",a:98.00,s:"360借条"},
 {d:"2026-05-13",a:147.57,s:"360借条"},
 {d:"2026-05-14",a:177.02,s:"360借条"},
+{d:"2026-05-14",a:94.08,s:"360借条"},
 {d:"2026-05-15",a:66.17,s:"360借条"},
 {d:"2026-05-15",a:219.86,s:"一加分期",t:"最后一期"},
 {d:"2026-05-17",a:94.54,s:"360借条"},
@@ -339,6 +163,7 @@ const D=[
 {d:"2026-06-05",a:47.27,s:"360借条"},
 {d:"2026-06-13",a:146.33,s:"360借条"},
 {d:"2026-06-14",a:174.81,s:"360借条"},
+{d:"2026-06-14",a:94.08,s:"360借条"},
 {d:"2026-06-15",a:66.17,s:"360借条"},
 {d:"2026-06-17",a:94.54,s:"360借条"},
 {d:"2026-06-17",a:103.97,s:"美团"},
@@ -352,6 +177,7 @@ const D=[
 {d:"2026-07-05",a:47.27,s:"360借条"},
 {d:"2026-07-13",a:143.95,s:"360借条"},
 {d:"2026-07-14",a:172.17,s:"360借条"},
+{d:"2026-07-14",a:94.08,s:"360借条"},
 {d:"2026-07-15",a:66.21,s:"360借条"},
 {d:"2026-07-17",a:94.54,s:"360借条"},
 {d:"2026-07-17",a:47.20,s:"美团",t:"最后一期"},
@@ -362,6 +188,7 @@ const D=[
 {d:"2026-08-03",a:94.83,s:"360借条"},
 {d:"2026-08-05",a:47.27,s:"360借条"},
 {d:"2026-08-13",a:142.56,s:"360借条"},
+{d:"2026-08-14",a:94.08,s:"360借条"},
 {d:"2026-08-17",a:94.50,s:"360借条"},
 {d:"2026-08-22",a:236.34,s:"360借条"},
 {d:"2026-08-28",a:167.07,s:"京东白条"},
@@ -369,6 +196,7 @@ const D=[
 {d:"2026-09-03",a:94.25,s:"360借条"},
 {d:"2026-09-05",a:47.27,s:"360借条"},
 {d:"2026-09-13",a:140.68,s:"360借条"},
+{d:"2026-09-14",a:94.08,s:"360借条"},
 {d:"2026-09-17",a:47.23,s:"360借条"},
 {d:"2026-09-22",a:236.34,s:"360借条"},
 {d:"2026-09-28",a:148.11,s:"京东白条"},
@@ -376,50 +204,50 @@ const D=[
 {d:"2026-10-03",a:93.54,s:"360借条"},
 {d:"2026-10-05",a:47.27,s:"360借条"},
 {d:"2026-10-13",a:138.46,s:"360借条"},
+{d:"2026-10-14",a:94.08,s:"360借条"},
 {d:"2026-10-22",a:236.26,s:"360借条"},
 {d:"2026-10-28",a:129.37,s:"京东白条"},
 {d:"2026-11-01",a:141.80,s:"360借条"},
 {d:"2026-11-03",a:93.11,s:"360借条"},
 {d:"2026-11-05",a:47.27,s:"360借条"},
 {d:"2026-11-13",a:136.85,s:"360借条"},
+{d:"2026-11-14",a:94.08,s:"360借条"},
 {d:"2026-11-28",a:110.41,s:"京东白条"},
 {d:"2026-12-01",a:141.80,s:"360借条"},
 {d:"2026-12-03",a:92.45,s:"360借条"},
 {d:"2026-12-05",a:47.27,s:"360借条"},
 {d:"2026-12-13",a:134.74,s:"360借条"},
+{d:"2026-12-14",a:94.08,s:"360借条"},
 {d:"2026-12-28",a:66.04,s:"京东白条"},
 {d:"2027-01-01",a:141.80,s:"360借条"},
 {d:"2027-01-03",a:91.94,s:"360借条"},
 {d:"2027-01-05",a:47.27,s:"360借条"},
 {d:"2027-01-13",a:133.00,s:"360借条"},
+{d:"2027-01-14",a:94.08,s:"360借条"},
 {d:"2027-01-28",a:24.85,s:"京东白条"},
 {d:"2027-02-01",a:141.80,s:"360借条"},
 {d:"2027-02-03",a:91.36,s:"360借条"},
 {d:"2027-02-05",a:47.27,s:"360借条"},
 {d:"2027-02-13",a:131.39,s:"360借条"},
+{d:"2027-02-14",a:94.08,s:"360借条"},
 {d:"2027-02-28",a:12.05,s:"京东白条",t:"最后一期"},
 {d:"2027-03-01",a:141.80,s:"360借条"},
 {d:"2027-03-03",a:47.27,s:"360借条"},
 {d:"2027-03-05",a:47.27,s:"360借条"},
+{d:"2027-03-14",a:94.08,s:"360借条"},
 {d:"2027-04-01",a:141.80,s:"360借条"},
 {d:"2027-04-03",a:47.23,s:"360借条"},
-{d:"2027-04-05",a:47.23,s:"360借条",t:"全部结清"}
+{d:"2027-04-05",a:47.23,s:"360借条"},
+{d:"2027-04-14",a:94.12,s:"360借条",t:"全部结清"}
 ];
 
 const WD=['日','一','二','三','四','五','六'];
-const DOTC={'360借条':'d360','苹果分期':'dapple','京东白条':'djd','一加分期':'done1','美团':'dmeituan'};
-const AMTC={'360借条':'a360','苹果分期':'aapple','京东白条':'ajd','一加分期':'aone','美团':'ameituan'};
-const MLS=[
-  {d:"2026-05-03",i:"🍎",t:"苹果分期结清"},
-  {d:"2026-05-15",i:"📱",t:"一加分期结清"},
-  {d:"2026-07-17",i:"🍜",t:"美团结清"},
-  {d:"2027-02-28",i:"💳",t:"京东白条结清"},
-  {d:"2027-04-05",i:"🎊",t:"全部归零"}
-];
+const DC={'360借条':'d1','苹果分期':'d2','京东白条':'d3','一加分期':'d2','美团':'d4'};
+const AC={'360借条':'a1','苹果分期':'a2','京东白条':'a3','一加分期':'a2','美团':'a4'};
+const ML=[{d:"2026-05-03",i:"🍎",t:"苹果分期结清"},{d:"2026-05-15",i:"📱",t:"一加分期结清"},{d:"2026-07-17",i:"🍜",t:"美团结清"},{d:"2027-02-28",i:"💳",t:"京东白条结清"},{d:"2027-04-14",i:"🎊",t:"全部归零"}];
 
-let ck={};
-try{ck=JSON.parse(localStorage.getItem('po3')||'{}')}catch(e){}
-function sv(){localStorage.setItem('po3',JSON.stringify(ck))}
+let ck={};try{ck=JSON.parse(localStorage.getItem('po5')||'{}')}catch(e){}
+function sv(){localStorage.setItem('po5',JSON.stringify(ck))}
 function wk(ds){const d=new Date(ds),w=d.getDay(),df=(w<4)?-(w+3):-(w-4);const s=new Date(d);s.setDate(s.getDate()+df);return s.toISOString().slice(0,10)}
 function fm(ds){const[y,m,d]=ds.split('-');return`${+m}/${+d}`}
 function gm(ds){return ds.slice(0,7)}
@@ -427,14 +255,11 @@ function tog(i){ck[i]=!ck[i];sv();upd()}
 function resetAll(){if(confirm('确定清除所有记录？')){ck={};sv();upd()}}
 
 function upd(){
-  const tot=D.reduce((s,d)=>s+d.a,0);
-  let paid=0,pc=0;
+  const tot=D.reduce((s,d)=>s+d.a,0);let paid=0,pc=0;
   D.forEach((d,i)=>{if(ck[i]){paid+=d.a;pc++}});
-  const rem=tot-paid;
-  const now=new Date(),cm=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const rem=tot-paid,now=new Date(),cm=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
   let mr=0;D.forEach((d,i)=>{if(gm(d.d)===cm&&!ck[i])mr+=d.a});
-
-  document.getElementById('hAmt').textContent=rem.toFixed(0);
+  document.getElementById('hA').textContent=rem.toFixed(0);
   document.getElementById('sP').textContent='¥'+paid.toFixed(0);
   document.getElementById('sM').textContent='¥'+mr.toFixed(0);
   document.getElementById('sC').textContent=pc+'/'+D.length;
@@ -442,81 +267,36 @@ function upd(){
   document.getElementById('pB').style.width=pct+'%';
   document.getElementById('pP').textContent=pct.toFixed(1)+'%';
   document.getElementById('pL').textContent=pc+'/'+D.length;
-
-  document.getElementById('ms').innerHTML=MLS.map(m=>{
-    const ri=D.filter(d=>{
-      if(m.t.includes('苹果'))return d.s==='苹果分期';
-      if(m.t.includes('一加'))return d.s==='一加分期';
-      if(m.t.includes('美团'))return d.s==='美团';
-      if(m.t.includes('白条'))return d.s==='京东白条';
-      return true;
-    });
+  document.getElementById('ms').innerHTML=ML.map(m=>{
+    const ri=D.filter(d=>{if(m.t.includes('苹果'))return d.s==='苹果分期';if(m.t.includes('一加'))return d.s==='一加分期';if(m.t.includes('美团'))return d.s==='美团';if(m.t.includes('白条'))return d.s==='京东白条';return true});
     const done=ri.every((_,j)=>ck[D.indexOf(ri[j])]);
-    return`<div class="ml ${done?'done':''}"><span class="ml-i">${m.i}</span><span class="ml-t">${m.t}</span><span class="ml-d">${fm(m.d)}</span></div>`;
-  }).join('');
-
-  D.forEach((d,i)=>{
-    const el=document.getElementById('c-'+i),row=document.getElementById('r-'+i);
-    if(el&&row){el.className='ck'+(ck[i]?' on':'');row.className='it'+(ck[i]?' dn':'')}
-  });
-
-  document.querySelectorAll('.wk-a').forEach(el=>{
-    const w=el.dataset.w;let wr=0;
-    D.forEach((d,i)=>{if(wk(d.d)===w&&!ck[i])wr+=d.a});
-    el.textContent='¥'+wr.toFixed(0);
-    el.className='wk-a'+(wr>800?' hi':wr>400?' mi':' lo');
-  });
+    return`<div class="ml ${done?'dn':''}"><span class="mli">${m.i}</span><span class="mlt">${m.t}</span><span class="mld">${fm(m.d)}</span></div>`}).join('');
+  D.forEach((d,i)=>{const el=document.getElementById('c-'+i),row=document.getElementById('r-'+i);if(el&&row){el.className='ck'+(ck[i]?' on':'');row.className='it'+(ck[i]?' dn':'')}});
+  document.querySelectorAll('.wka').forEach(el=>{const w=el.dataset.w;let wr=0;D.forEach((d,i)=>{if(wk(d.d)===w&&!ck[i])wr+=d.a});el.textContent='¥'+wr.toFixed(0)});
 }
 
 function render(){
   const weeks={},mmap={};
-  D.forEach((d,i)=>{
-    const w=wk(d.d);if(!weeks[w])weeks[w]=[];weeks[w].push({...d,i});
-    const m=gm(d.d);if(!mmap[m])mmap[m]=[];if(!mmap[m].includes(w))mmap[m].push(w);
-  });
-  const app=document.getElementById('app'),months=Object.keys(mmap).sort();
-  let h='';
+  D.forEach((d,i)=>{const w=wk(d.d);if(!weeks[w])weeks[w]=[];weeks[w].push({...d,i});const m=gm(d.d);if(!mmap[m])mmap[m]=[];if(!mmap[m].includes(w))mmap[m].push(w)});
+  const app=document.getElementById('app'),months=Object.keys(mmap).sort();let h='';
   months.forEach(mk=>{
-    const[y,m]=mk.split('-');const yr=y==='2027'?"'27 ":'';
-    const ml=`${yr}${+m}月`;
+    const[y,m]=mk.split('-');const yr=y==='2027'?"'27 ":'';const ml=`${yr}${+m}月`;
     const mt=D.filter(d=>gm(d.d)===mk).reduce((s,d)=>s+d.a,0);
-    h+=`<div class="sec" id="m-${mk}"><div class="sec-h"><span class="sec-m">${ml}</span><span class="sec-t">¥${mt.toFixed(0)}</span></div>`;
-    mmap[mk].sort().forEach(wk=>{
-      const items=weeks[wk],we=new Date(wk);we.setDate(we.getDate()+6);
-      const wes=we.toISOString().slice(0,10),wt=items.reduce((s,d)=>s+d.a,0);
-      h+=`<div class="wk"><div class="wk-h"><span class="wk-r">${fm(wk)} — ${fm(wes)}</span><span class="wk-a${wt>800?' hi':wt>400?' mi':' lo'}" data-w="${wk}">¥${wt.toFixed(0)}</span></div>`;
+    h+=`<div class="sec" id="m-${mk}"><div class="sh"><span class="sm">${ml}</span><span class="st2">¥${mt.toFixed(0)}</span></div>`;
+    mmap[mk].sort().forEach(w=>{
+      const items=weeks[w],we=new Date(w);we.setDate(we.getDate()+6);const wes=we.toISOString().slice(0,10),wt=items.reduce((s,d)=>s+d.a,0);
+      h+=`<div class="wk"><div class="wkh"><span class="wkr">${fm(w)} — ${fm(wes)}</span><span class="wka" data-w="${w}">¥${wt.toFixed(0)}</span></div>`;
       items.forEach(it=>{
-        const dt=new Date(it.d),wd=WD[dt.getDay()],on=ck[it.i];
-        let tag='';
-        if(it.t){const tc=it.t.includes('最后')||it.t.includes('结清')?'tg-end':'tg-fire';tag=`<span class="it-tag ${tc}">${it.t}</span>`}
-        h+=`<div class="it${on?' dn':''}" id="r-${it.i}" onclick="tog(${it.i})"><div class="ck${on?' on':''}" id="c-${it.i}"></div><div class="it-b"><div class="it-top"><span class="it-dt">${fm(it.d)}</span><span class="it-dy">周${wd}</span>${tag}</div><div class="it-s"><span class="dot ${DOTC[it.s]||''}"></span>${it.s}</div></div><div class="it-a ${AMTC[it.s]||''}">¥${it.a.toFixed(2)}</div></div>`;
-      });
-      h+=`</div>`;
-    });
-    h+=`</div>`;
-  });
+        const dt=new Date(it.d),wd=WD[dt.getDay()],on=ck[it.i];let tag='';
+        if(it.t){const tc=it.t.includes('最后')||it.t.includes('结清')?'te':'tf';tag=`<span class="itg ${tc}">${it.t}</span>`}
+        h+=`<div class="it${on?' dn':''}" id="r-${it.i}" onclick="tog(${it.i})"><div class="ck${on?' on':''}" id="c-${it.i}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt ${DC[it.s]||''}"></span>${it.s}</div></div><div class="ia ${AC[it.s]||''}">¥${it.a.toFixed(2)}</div></div>`});
+      h+=`</div>`});h+=`</div>`});
   app.innerHTML=h;
-  document.getElementById('nv').innerHTML=months.map(mk=>{
-    const[y,m]=mk.split('-');const yr=y==='2027'?"'27 ":'';
-    return`<button class="nav-i" data-m="${mk}" onclick="goM('${mk}')">${yr}${+m}月</button>`;
-  }).join('');
+  document.getElementById('nv').innerHTML=months.map(mk=>{const[y,m]=mk.split('-');const yr=y==='2027'?"'27 ":'';return`<button class="ni" data-m="${mk}" onclick="goM('${mk}')">${yr}${+m}月</button>`}).join('');
   upd();updN();
 }
-
-function goM(mk){
-  const el=document.getElementById('m-'+mk);
-  if(el){const off=document.getElementById('hd').offsetHeight+document.getElementById('nv').offsetHeight+10;
-  window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-off,behavior:'smooth'})}
-}
-function updN(){
-  const btns=document.querySelectorAll('.nav-i');
-  const off=document.getElementById('hd').offsetHeight+document.getElementById('nv').offsetHeight+60;
-  let ac=null;
-  document.querySelectorAll('.sec[id^="m-"]').forEach(s=>{if(s.getBoundingClientRect().top<off+100)ac=s.id.replace('m-','')});
-  btns.forEach(b=>b.classList.toggle('active',b.dataset.m===ac));
-  const ab=document.querySelector('.nav-i.active');
-  if(ab){const n=document.getElementById('nv');n.scrollTo({left:ab.offsetLeft-n.offsetWidth/2+ab.offsetWidth/2,behavior:'smooth'})}
-}
+function goM(mk){const el=document.getElementById('m-'+mk);if(el){const off=document.getElementById('hd').offsetHeight+document.getElementById('nv').offsetHeight+10;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-off,behavior:'smooth'})}}
+function updN(){const btns=document.querySelectorAll('.ni'),off=document.getElementById('hd').offsetHeight+document.getElementById('nv').offsetHeight+60;let ac=null;document.querySelectorAll('.sec[id^="m-"]').forEach(s=>{if(s.getBoundingClientRect().top<off+100)ac=s.id.replace('m-','')});btns.forEach(b=>b.classList.toggle('on',b.dataset.m===ac));const ab=document.querySelector('.ni.on');if(ab){const n=document.getElementById('nv');n.scrollTo({left:ab.offsetLeft-n.offsetWidth/2+ab.offsetWidth/2,behavior:'smooth'})}}
 let st;window.addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(updN,50);document.getElementById('tp').classList.toggle('show',window.scrollY>400)});
 render();
 </script>
