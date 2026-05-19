@@ -81,7 +81,7 @@ body{
 
 .hd{position:sticky;top:0;z-index:100;background:var(--hd-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:8px 16px 8px}
 .brand-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.brand{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--text3);flex:1;text-align:center;margin-left:28px}
+.brand{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--text3);flex:1;text-align:center}
 .theme-toggle{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:var(--chip);border:none;border-radius:50%;cursor:pointer;font-size:18px;color:var(--text2);position:relative;line-height:1;font-weight:700;letter-spacing:-2px;padding-bottom:4px}
 
 .hero{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:6px;position:relative}
@@ -165,14 +165,14 @@ body{
 .alert-count{font-family:'DM Mono',monospace;font-size:12px;color:var(--od-tag-c);font-weight:700}
 
 .sec{padding:0 16px;margin-bottom:4px}
-.sh{display:flex;align-items:baseline;gap:10px;padding:20px 0 10px}
-.sm{font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--text)}
-.st2{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--text2);background:var(--chip);padding:3px 12px;border-radius:100px}
+.sh{display:flex;align-items:center;gap:10px;padding:20px 0 10px}
+.sm{font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--text);line-height:1}
+.st2{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--text2);background:var(--chip);padding:3px 12px;border-radius:100px;font-variant-numeric:tabular-nums}
 
-.wk{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+.wk{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
 .wkh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border-soft)}
-.wkr{font-size:13px;color:var(--text2);font-weight:700}
-.wka{font-family:'DM Mono',monospace;font-size:15px;font-weight:800;color:var(--text)}
+.wkr{font-size:13px;color:var(--text2);font-weight:700;font-variant-numeric:tabular-nums}
+.wka{font-family:'DM Mono',monospace;font-size:15px;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
 
 .it{display:flex;align-items:center;padding:14px 16px;gap:12px;border-bottom:1px solid var(--border-soft);transition:all .2s;cursor:pointer;-webkit-user-select:none;user-select:none;min-height:60px}
 .it:last-child{border-bottom:none}
@@ -200,7 +200,7 @@ body{
 .is{font-size:12px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:5px;font-weight:600}
 .dt{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--dot)}
 
-.ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text);flex-shrink:0;pointer-events:none}
+.ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text);flex-shrink:0;pointer-events:none;font-variant-numeric:tabular-nums}
 
 .empty{text-align:center;padding:60px 20px;color:var(--text3)}
 .empty-i{font-size:48px;margin-bottom:12px}
@@ -482,7 +482,14 @@ function sv(){
   try{localStorage.setItem('po6',JSON.stringify(ck))}catch(e){}
   updateUrl();
 }
-function wk(ds){const d=new Date(ds+'T00:00:00'),w=d.getDay(),df=(w<4)?-(w+3):-(w-4);const s=new Date(d);s.setDate(s.getDate()+df);return s.toISOString().slice(0,10)}
+function fmtDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function wk(ds){
+  const d=new Date(ds+'T00:00:00');
+  const w=d.getDay();
+  const df=(w<4)?-(w+3):-(w-4);
+  d.setDate(d.getDate()+df);
+  return fmtDate(d);
+}
 function fm(ds){const[y,m,d]=ds.split('-');return`${+m}/${+d}`}
 function gm(ds){return ds.slice(0,7)}
 function daysBetween(a,b){const da=new Date(a+'T00:00:00'),db=new Date(b+'T00:00:00');return Math.round((db-da)/86400000)}
@@ -597,7 +604,7 @@ function renderUpcoming(){
   // 从今天起算7天内（含今天）所有还款
   const endDate=new Date(TODAY+'T00:00:00');
   endDate.setDate(endDate.getDate()+6);
-  const endStr=endDate.toISOString().slice(0,10);
+  const endStr=fmtDate(endDate);
   const items=D.map((d,i)=>({...d,i})).filter(it=>it.d>=TODAY&&it.d<=endStr);
   const totalUnpaid=items.filter(it=>!ck[it.i]).reduce((s,it)=>s+it.a,0);
   sub.textContent=items.length?`未还 ¥${totalUnpaid.toFixed(0)}`:'';
@@ -644,7 +651,7 @@ function updStats(animate){
   // 用已有的 wk() 函数：返回当前所在周的周四日期
   const weekStart=wk(TODAY);
   const weekEndD=new Date(weekStart+'T00:00:00');weekEndD.setDate(weekEndD.getDate()+6);
-  const weekEnd=weekEndD.toISOString().slice(0,10);
+  const weekEnd=fmtDate(weekEndD);
   let wRem=0;
   D.forEach((d,i)=>{if(!ck[i]&&d.d>=TODAY&&d.d<=weekEnd)wRem+=d.a});
   document.getElementById('sW').textContent='¥'+wRem.toFixed(0);
@@ -747,7 +754,7 @@ function render(animate){
       const items=weeks[w];
       const we=new Date(w+'T00:00:00');
       we.setDate(we.getDate()+6);
-      const wes=we.toISOString().slice(0,10);
+      const wes=fmtDate(we);
       const wt=items.filter(it=>!ck[it.i]).reduce((s,d)=>s+d.a,0);
       h+=`<div class="wk"><div class="wkh"><span class="wkr">${fm(w)} — ${fm(wes)}</span><span class="wka">¥${wt.toFixed(0)}</span></div>`;
       items.forEach(it=>{
