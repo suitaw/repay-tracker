@@ -12,19 +12,9 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#fafaf9;
-  --y:#fafaf9;
-  --y2:#f5f5f4;
-  --y3:#e7e5e4;
-  --yd:#fafaf9;
-  --onY:#1c1917;
-  --onY2:rgba(28,25,23,0.45);
   --text:#1c1917;
   --text2:#78716c;
   --text3:#a8a29e;
-  --c360:#ff8c2e;
-  --cjd:#e83030;
-  --cmt:#ffc107;
-  --cg:#4caf50;
   --r:14px;
 }
 body{
@@ -36,23 +26,20 @@ body{
 .hd{position:sticky;top:0;z-index:100;background:rgba(250,250,249,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid #e7e5e4;padding:14px 16px 12px}
 .brand{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:#a8a29e;text-align:center;margin-bottom:12px}
 
-.hero{background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:22px 16px;text-align:center;margin-bottom:10px;position:relative;overflow:hidden}
-.hero::before{display:none}
-.hero-n{font-family:'DM Mono',monospace;font-size:48px;font-weight:800;letter-spacing:-2px;color:#1c1917;line-height:1;position:relative}
+.hero{background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:22px 16px;text-align:center;margin-bottom:10px}
+.hero-n{font-family:'DM Mono',monospace;font-size:48px;font-weight:800;letter-spacing:-2px;color:#1c1917;line-height:1}
 .hero-n .u{font-size:24px;font-weight:500;opacity:.4;margin-right:2px}
-.hero-l{font-size:11px;color:#a8a29e;margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700;position:relative}
+.hero-l{font-size:11px;color:#a8a29e;margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
 
 .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
-.box{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:12px 6px;text-align:center;position:relative;overflow:hidden}
-.box::before{display:none}
-.box-v{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:#1c1917;position:relative}
-.box-l{font-size:10px;color:#a8a29e;margin-top:2px;font-weight:600;position:relative}
+.box{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:12px 6px;text-align:center}
+.box-v{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:#1c1917}
+.box-l{font-size:10px;color:#a8a29e;margin-top:2px;font-weight:600}
 
-.pw{background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:10px 14px;position:relative;overflow:hidden}
-.pw::before{display:none}
-.pb{height:6px;background:#f5f5f4;border-radius:3px;overflow:hidden;position:relative}
+.pw{background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:10px 14px}
+.pb{height:6px;background:#f5f5f4;border-radius:3px;overflow:hidden}
 .pbf{height:100%;background:#1c1917;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-.pi{display:flex;justify-content:space-between;margin-top:5px;font-family:'DM Mono',monospace;font-size:11px;color:#a8a29e;position:relative}
+.pi{display:flex;justify-content:space-between;margin-top:5px;font-family:'DM Mono',monospace;font-size:11px;color:#a8a29e}
 
 .nv{display:flex;gap:4px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;position:sticky;top:210px;z-index:50;background:rgba(250,250,249,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #e7e5e4}
 .nv::-webkit-scrollbar{display:none}
@@ -60,31 +47,31 @@ body{
 .ni.on{background:#1c1917;color:#fff}
 
 .mls{padding:10px 16px 4px}
-.ml{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1px solid #e7e5e4;border-radius:12px;margin-bottom:6px;transition:all .3s;position:relative;overflow:hidden}
-.ml::before{display:none}
+.ml{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1px solid #e7e5e4;border-radius:12px;margin-bottom:6px;transition:all .3s}
 .ml.dn{background:#f0fdf4;border-color:#bbf7d0}
 .ml.dn .mlt{color:#a8a29e;text-decoration:line-through}
 .ml.dn .mld{color:#a8a29e}
-.mli{font-size:16px;flex-shrink:0;position:relative}
-.mlt{flex:1;font-size:13px;font-weight:700;color:#1c1917;position:relative}
-.mld{font-family:'DM Mono',monospace;font-size:12px;color:#a8a29e;position:relative}
+.mli{font-size:16px;flex-shrink:0}
+.mlt{flex:1;font-size:13px;font-weight:700;color:#1c1917}
+.mld{font-family:'DM Mono',monospace;font-size:12px;color:#a8a29e}
 
 .sec{padding:0 16px;margin-bottom:4px}
 .sh{display:flex;align-items:baseline;gap:10px;padding:20px 0 10px;position:sticky;top:252px;background:var(--bg);z-index:10}
 .sm{font-size:24px;font-weight:800;letter-spacing:-.5px;color:#1c1917}
 .st2{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#78716c;background:#f5f5f4;padding:3px 12px;border-radius:100px}
 
-.wk{background:#fff;border:1px solid #e7e5e4;border-radius:var(--r);margin-bottom:10px;overflow:hidden;position:relative}
-.wk::before{display:none}
-.wkh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #f5f5f4;position:relative;z-index:2}
+.wk{background:#fff;border:1px solid #e7e5e4;border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+.wkh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #f5f5f4}
 .wkr{font-size:13px;color:#78716c;font-weight:700}
 .wka{font-family:'DM Mono',monospace;font-size:15px;font-weight:800;color:#1c1917}
 
-.it{display:flex;align-items:center;padding:12px 16px;gap:12px;border-bottom:1px solid #f5f5f4;transition:all .2s;cursor:pointer;-webkit-user-select:none;user-select:none;position:relative;z-index:2}
+.it{display:flex;align-items:center;padding:12px 16px;gap:12px;border-bottom:1px solid #f5f5f4;transition:all .2s;cursor:pointer;-webkit-user-select:none;user-select:none}
 .it:last-child{border-bottom:none}
 .it:active{background:#f5f5f4}
 .it.dn{opacity:.3}
 .it.dn .ia{text-decoration:line-through}
+.it.today{background:#fffbeb}
+.it.today.dn{background:transparent}
 
 .ck{width:24px;height:24px;border-radius:50%;border:2px solid #d6d3d1;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff}
 .ck.on{border-color:#16a34a;background:#16a34a}
@@ -95,19 +82,21 @@ body{
 .idt{font-size:14px;font-weight:700;color:#1c1917}
 .idy{font-size:12px;color:#a8a29e;font-weight:600}
 .itg{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:700;letter-spacing:.3px}
+.tt{background:#fef3c7;color:#b45309}
 .te{background:#f0fdf4;color:#16a34a}
-.tf{background:#fef2f2;color:#dc2626}
 
 .is{font-size:12px;color:#a8a29e;margin-top:2px;display:flex;align-items:center;gap:5px;font-weight:600}
-.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.d1{background:#ff8c2e}.d2{background:#4caf50}.d3{background:#e83030}.d4{background:#ffc107}
+.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:#ff8c2e}
 
-.ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;flex-shrink:0}
-.a1{color:#1c1917}.a2{color:#1c1917}.a3{color:#1c1917}.a4{color:#1c1917}
+.ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:#1c1917;flex-shrink:0}
 
 .rst{display:block;margin:40px auto 20px;padding:13px 32px;background:#fff;color:#dc2626;border:1px solid #e7e5e4;border-radius:100px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
+.shr{display:block;margin:10px auto;padding:11px 28px;background:#1c1917;color:#fff;border:none;border-radius:100px;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
 .top{position:fixed;bottom:28px;right:20px;width:48px;height:48px;border-radius:50%;background:#1c1917;color:#fff;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,0.15);opacity:0;pointer-events:none;transition:all .3s;border:none}
 .top.show{opacity:1;pointer-events:auto}
+
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:#1c1917;color:#fff;padding:10px 20px;border-radius:100px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:300}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -124,132 +113,196 @@ body{
 <div class="nv" id="nv"></div>
 <div class="mls" id="ms"></div>
 <div id="app"></div>
+<button class="shr" onclick="shareUrl()">复制带进度的链接</button>
 <button class="rst" onclick="resetAll()">重置所有记录</button>
 <button class="top" id="tp" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast"></div>
 <script>
 const D=[
-{d:"2026-04-14",a:179.88,s:"360借条"},
-{d:"2026-04-15",a:175.35,s:"360借条"},
-{d:"2026-04-15",a:219.92,s:"一加分期",t:"倒数第2期"},
-{d:"2026-04-17",a:94.54,s:"360借条"},
-{d:"2026-04-17",a:207.98,s:"美团"},
-{d:"2026-04-20",a:208.04,s:"360借条"},
-{d:"2026-04-22",a:236.34,s:"360借条"},
-{d:"2026-04-28",a:132.35,s:"360借条"},
-{d:"2026-04-28",a:255.29,s:"京东白条"},
-{d:"2026-05-01",a:425.36,s:"360借条"},
-{d:"2026-05-02",a:189.07,s:"360借条"},
-{d:"2026-05-03",a:96.24,s:"360借条"},
-{d:"2026-05-03",a:767.00,s:"苹果分期",t:"最后一期"},
-{d:"2026-05-05",a:47.27,s:"360借条"},
-{d:"2026-05-08",a:98.00,s:"360借条"},
-{d:"2026-05-13",a:147.57,s:"360借条"},
-{d:"2026-05-14",a:177.02,s:"360借条"},
-{d:"2026-05-14",a:94.08,s:"360借条"},
-{d:"2026-05-15",a:66.17,s:"360借条"},
-{d:"2026-05-15",a:219.86,s:"一加分期",t:"最后一期"},
-{d:"2026-05-17",a:94.54,s:"360借条"},
-{d:"2026-05-17",a:207.89,s:"美团"},
-{d:"2026-05-20",a:208.04,s:"360借条"},
-{d:"2026-05-22",a:236.34,s:"360借条"},
-{d:"2026-05-28",a:132.35,s:"360借条"},
-{d:"2026-05-28",a:255.29,s:"京东白条"},
-{d:"2026-06-01",a:378.13,s:"360借条"},
-{d:"2026-06-02",a:189.07,s:"360借条"},
-{d:"2026-06-03",a:95.95,s:"360借条"},
-{d:"2026-06-05",a:47.27,s:"360借条"},
-{d:"2026-06-13",a:146.33,s:"360借条"},
-{d:"2026-06-14",a:174.81,s:"360借条"},
-{d:"2026-06-14",a:94.08,s:"360借条"},
-{d:"2026-06-15",a:66.17,s:"360借条"},
-{d:"2026-06-17",a:94.54,s:"360借条"},
-{d:"2026-06-17",a:103.97,s:"美团"},
-{d:"2026-06-20",a:208.04,s:"360借条"},
-{d:"2026-06-22",a:236.34,s:"360借条"},
-{d:"2026-06-28",a:132.31,s:"360借条"},
-{d:"2026-06-28",a:219.45,s:"京东白条"},
-{d:"2026-07-01",a:378.13,s:"360借条"},
-{d:"2026-07-02",a:189.07,s:"360借条"},
-{d:"2026-07-03",a:95.17,s:"360借条"},
-{d:"2026-07-05",a:47.27,s:"360借条"},
-{d:"2026-07-13",a:143.95,s:"360借条"},
-{d:"2026-07-14",a:172.17,s:"360借条"},
-{d:"2026-07-14",a:94.08,s:"360借条"},
-{d:"2026-07-15",a:66.21,s:"360借条"},
-{d:"2026-07-17",a:94.54,s:"360借条"},
-{d:"2026-07-17",a:47.20,s:"美团",t:"最后一期"},
-{d:"2026-07-22",a:236.34,s:"360借条"},
-{d:"2026-07-28",a:189.08,s:"京东白条"},
-{d:"2026-08-01",a:236.33,s:"360借条"},
-{d:"2026-08-02",a:189.03,s:"360借条"},
-{d:"2026-08-03",a:94.83,s:"360借条"},
-{d:"2026-08-05",a:47.27,s:"360借条"},
-{d:"2026-08-13",a:142.56,s:"360借条"},
-{d:"2026-08-14",a:94.08,s:"360借条"},
-{d:"2026-08-17",a:94.50,s:"360借条"},
-{d:"2026-08-22",a:236.34,s:"360借条"},
-{d:"2026-08-28",a:167.07,s:"京东白条"},
-{d:"2026-09-01",a:236.37,s:"360借条"},
-{d:"2026-09-03",a:94.25,s:"360借条"},
-{d:"2026-09-05",a:47.27,s:"360借条"},
-{d:"2026-09-13",a:140.68,s:"360借条"},
-{d:"2026-09-14",a:94.08,s:"360借条"},
-{d:"2026-09-17",a:47.23,s:"360借条"},
-{d:"2026-09-22",a:236.34,s:"360借条"},
-{d:"2026-09-28",a:148.11,s:"京东白条"},
-{d:"2026-10-01",a:141.80,s:"360借条"},
-{d:"2026-10-03",a:93.54,s:"360借条"},
-{d:"2026-10-05",a:47.27,s:"360借条"},
-{d:"2026-10-13",a:138.46,s:"360借条"},
-{d:"2026-10-14",a:94.08,s:"360借条"},
-{d:"2026-10-22",a:236.26,s:"360借条"},
-{d:"2026-10-28",a:129.37,s:"京东白条"},
-{d:"2026-11-01",a:141.80,s:"360借条"},
-{d:"2026-11-03",a:93.11,s:"360借条"},
-{d:"2026-11-05",a:47.27,s:"360借条"},
-{d:"2026-11-13",a:136.85,s:"360借条"},
-{d:"2026-11-14",a:94.08,s:"360借条"},
-{d:"2026-11-28",a:110.41,s:"京东白条"},
-{d:"2026-12-01",a:141.80,s:"360借条"},
-{d:"2026-12-03",a:92.45,s:"360借条"},
-{d:"2026-12-05",a:47.27,s:"360借条"},
-{d:"2026-12-13",a:134.74,s:"360借条"},
-{d:"2026-12-14",a:94.08,s:"360借条"},
-{d:"2026-12-28",a:66.04,s:"京东白条"},
-{d:"2027-01-01",a:141.80,s:"360借条"},
-{d:"2027-01-03",a:91.94,s:"360借条"},
-{d:"2027-01-05",a:47.27,s:"360借条"},
-{d:"2027-01-13",a:133.00,s:"360借条"},
-{d:"2027-01-14",a:94.08,s:"360借条"},
-{d:"2027-01-28",a:24.85,s:"京东白条"},
-{d:"2027-02-01",a:141.80,s:"360借条"},
-{d:"2027-02-03",a:91.36,s:"360借条"},
-{d:"2027-02-05",a:47.27,s:"360借条"},
-{d:"2027-02-13",a:131.39,s:"360借条"},
-{d:"2027-02-14",a:94.08,s:"360借条"},
-{d:"2027-02-28",a:12.05,s:"京东白条",t:"最后一期"},
-{d:"2027-03-01",a:141.80,s:"360借条"},
-{d:"2027-03-03",a:47.27,s:"360借条"},
-{d:"2027-03-05",a:47.27,s:"360借条"},
-{d:"2027-03-14",a:94.08,s:"360借条"},
-{d:"2027-04-01",a:141.80,s:"360借条"},
-{d:"2027-04-03",a:47.23,s:"360借条"},
-{d:"2027-04-05",a:47.23,s:"360借条"},
-{d:"2027-04-14",a:94.12,s:"360借条",t:"全部结清"}
+{d:"2026-05-20",a:208.04},
+{d:"2026-05-22",a:236.34},
+{d:"2026-05-28",a:264.70},
+{d:"2026-06-01",a:378.13},
+{d:"2026-06-02",a:189.07},
+{d:"2026-06-03",a:95.95},
+{d:"2026-06-05",a:47.27},
+{d:"2026-06-10",a:47.27},
+{d:"2026-06-13",a:146.33},
+{d:"2026-06-14",a:344.97},
+{d:"2026-06-15",a:66.17},
+{d:"2026-06-17",a:94.54},
+{d:"2026-06-19",a:375.89},
+{d:"2026-06-20",a:208.04},
+{d:"2026-06-22",a:236.34},
+{d:"2026-06-28",a:264.66},
+{d:"2026-07-01",a:378.13},
+{d:"2026-07-02",a:189.07},
+{d:"2026-07-03",a:95.17},
+{d:"2026-07-05",a:47.27},
+{d:"2026-07-10",a:47.27},
+{d:"2026-07-13",a:143.95},
+{d:"2026-07-14",a:342.33},
+{d:"2026-07-15",a:66.21},
+{d:"2026-07-17",a:94.54},
+{d:"2026-07-19",a:375.89},
+{d:"2026-07-22",a:236.34},
+{d:"2026-07-28",a:132.35},
+{d:"2026-08-01",a:236.33},
+{d:"2026-08-02",a:189.03},
+{d:"2026-08-03",a:94.83},
+{d:"2026-08-05",a:47.27},
+{d:"2026-08-10",a:47.27},
+{d:"2026-08-13",a:142.56},
+{d:"2026-08-14",a:170.16},
+{d:"2026-08-17",a:94.50},
+{d:"2026-08-19",a:375.89},
+{d:"2026-08-22",a:236.34},
+{d:"2026-08-28",a:132.35},
+{d:"2026-09-01",a:236.37},
+{d:"2026-09-03",a:94.25},
+{d:"2026-09-05",a:47.27},
+{d:"2026-09-10",a:47.27},
+{d:"2026-09-13",a:140.68},
+{d:"2026-09-14",a:170.16},
+{d:"2026-09-17",a:47.23},
+{d:"2026-09-19",a:375.89},
+{d:"2026-09-22",a:236.34},
+{d:"2026-09-28",a:132.35},
+{d:"2026-10-01",a:141.80},
+{d:"2026-10-03",a:93.54},
+{d:"2026-10-05",a:47.27},
+{d:"2026-10-10",a:47.27},
+{d:"2026-10-13",a:138.46},
+{d:"2026-10-14",a:170.16},
+{d:"2026-10-19",a:375.89},
+{d:"2026-10-22",a:236.26},
+{d:"2026-10-28",a:132.35},
+{d:"2026-11-01",a:141.80},
+{d:"2026-11-03",a:93.11},
+{d:"2026-11-05",a:47.27},
+{d:"2026-11-10",a:47.27},
+{d:"2026-11-13",a:136.85},
+{d:"2026-11-14",a:170.16},
+{d:"2026-11-19",a:375.89},
+{d:"2026-11-28",a:132.35},
+{d:"2026-12-01",a:141.80},
+{d:"2026-12-03",a:92.45},
+{d:"2026-12-05",a:47.27},
+{d:"2026-12-10",a:47.27},
+{d:"2026-12-13",a:134.74},
+{d:"2026-12-14",a:170.16},
+{d:"2026-12-19",a:375.89},
+{d:"2026-12-28",a:132.35},
+{d:"2027-01-01",a:141.80},
+{d:"2027-01-03",a:91.94},
+{d:"2027-01-05",a:47.27},
+{d:"2027-01-10",a:47.27},
+{d:"2027-01-13",a:133.00},
+{d:"2027-01-14",a:170.16},
+{d:"2027-01-19",a:375.89},
+{d:"2027-01-28",a:132.35},
+{d:"2027-02-01",a:141.80},
+{d:"2027-02-03",a:91.36},
+{d:"2027-02-05",a:47.27},
+{d:"2027-02-10",a:47.27},
+{d:"2027-02-13",a:131.39},
+{d:"2027-02-14",a:170.16},
+{d:"2027-02-19",a:375.89},
+{d:"2027-02-28",a:132.35},
+{d:"2027-03-01",a:141.80},
+{d:"2027-03-03",a:47.27},
+{d:"2027-03-05",a:47.27},
+{d:"2027-03-10",a:47.27},
+{d:"2027-03-14",a:170.16},
+{d:"2027-03-19",a:375.89},
+{d:"2027-03-28",a:132.35},
+{d:"2027-04-01",a:141.80},
+{d:"2027-04-03",a:47.23},
+{d:"2027-04-05",a:47.23},
+{d:"2027-04-10",a:47.27},
+{d:"2027-04-14",a:170.20},
+{d:"2027-04-19",a:375.89},
+{d:"2027-04-28",a:132.31},
+{d:"2027-05-10",a:47.23},
+{d:"2027-05-14",a:75.59},
+{d:"2027-05-19",a:375.93,t:"最后一期"}
 ];
 
 const WD=['日','一','二','三','四','五','六'];
-const DC={'360借条':'d1','苹果分期':'d2','京东白条':'d3','一加分期':'d2','美团':'d4'};
-const AC={'360借条':'a1','苹果分期':'a2','京东白条':'a3','一加分期':'a2','美团':'a4'};
-const ML=[{d:"2026-05-03",i:"🍎",t:"苹果分期结清"},{d:"2026-05-15",i:"📱",t:"一加分期结清"},{d:"2026-07-17",i:"🍜",t:"美团结清"},{d:"2027-02-28",i:"💳",t:"京东白条结清"},{d:"2027-04-14",i:"🎊",t:"全部归零"}];
+const TODAY=new Date().toISOString().slice(0,10);
 
-let ck={};try{ck=JSON.parse(localStorage.getItem('po5')||'{}')}catch(e){}
-function sv(){localStorage.setItem('po5',JSON.stringify(ck))}
+// 里程碑：完成第N期时点亮
+const ML=[
+  {n:10,i:"🚩",t:"完成 10 期"},
+  {n:27,i:"🥉",t:"完成 1/4 ("+Math.round(107/4)+" 期)"},
+  {n:54,i:"🥈",t:"完成 1/2 ("+Math.round(107/2)+" 期)"},
+  {n:80,i:"🥇",t:"完成 3/4 ("+Math.round(107*3/4)+" 期)"},
+  {n:97,i:"🔔",t:"还剩 10 期"},
+  {n:107,i:"🎊",t:"全部结清"}
+];
+
+// ===== 状态持久化：URL 优先，localStorage 兜底 =====
+function decodeFromUrl(){
+  try{
+    const u=new URL(location.href);
+    const s=u.searchParams.get('s');
+    if(!s)return null;
+    // s 是 base36 bitmask（每个字符代表5位）
+    const bits=[];
+    for(let i=0;i<s.length;i++){
+      const v=parseInt(s[i],36);
+      for(let j=0;j<5;j++){bits.push((v>>j)&1)}
+    }
+    const obj={};
+    for(let i=0;i<D.length;i++)if(bits[i])obj[i]=true;
+    return obj;
+  }catch(e){return null}
+}
+function encodeToUrl(){
+  const bits=[];
+  for(let i=0;i<D.length;i++)bits.push(ck[i]?1:0);
+  let s='';
+  for(let i=0;i<bits.length;i+=5){
+    let v=0;
+    for(let j=0;j<5;j++)v|=(bits[i+j]||0)<<j;
+    s+=v.toString(36);
+  }
+  return s;
+}
+function updateUrl(){
+  const s=encodeToUrl();
+  const u=new URL(location.href);
+  if(s.replace(/0+$/,''))u.searchParams.set('s',s);
+  else u.searchParams.delete('s');
+  history.replaceState(null,'',u.toString());
+}
+
+let ck={};
+const fromUrl=decodeFromUrl();
+if(fromUrl){
+  ck=fromUrl;
+  try{localStorage.setItem('po6',JSON.stringify(ck))}catch(e){}
+}else{
+  try{ck=JSON.parse(localStorage.getItem('po6')||'{}')}catch(e){}
+}
+
+function sv(){
+  try{localStorage.setItem('po6',JSON.stringify(ck))}catch(e){}
+  updateUrl();
+}
 function wk(ds){const d=new Date(ds),w=d.getDay(),df=(w<4)?-(w+3):-(w-4);const s=new Date(d);s.setDate(s.getDate()+df);return s.toISOString().slice(0,10)}
 function fm(ds){const[y,m,d]=ds.split('-');return`${+m}/${+d}`}
 function gm(ds){return ds.slice(0,7)}
-function tog(i){ck[i]=!ck[i];sv();upd()}
+function tog(i){ck[i]=!ck[i];if(!ck[i])delete ck[i];sv();upd()}
 function resetAll(){if(confirm('确定清除所有记录？')){ck={};sv();upd()}}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function shareUrl(){
+  updateUrl();
+  const url=location.href;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>showToast('链接已复制')).catch(()=>{prompt('复制此链接：',url)})
+  }else{prompt('复制此链接：',url)}
+}
 
 function upd(){
   const tot=D.reduce((s,d)=>s+d.a,0);let paid=0,pc=0;
@@ -265,10 +318,9 @@ function upd(){
   document.getElementById('pP').textContent=pct.toFixed(1)+'%';
   document.getElementById('pL').textContent=pc+'/'+D.length;
   document.getElementById('ms').innerHTML=ML.map(m=>{
-    const ri=D.filter(d=>{if(m.t.includes('苹果'))return d.s==='苹果分期';if(m.t.includes('一加'))return d.s==='一加分期';if(m.t.includes('美团'))return d.s==='美团';if(m.t.includes('白条'))return d.s==='京东白条';return true});
-    const done=ri.every((_,j)=>ck[D.indexOf(ri[j])]);
-    return`<div class="ml ${done?'dn':''}"><span class="mli">${m.i}</span><span class="mlt">${m.t}</span><span class="mld">${fm(m.d)}</span></div>`}).join('');
-  D.forEach((d,i)=>{const el=document.getElementById('c-'+i),row=document.getElementById('r-'+i);if(el&&row){el.className='ck'+(ck[i]?' on':'');row.className='it'+(ck[i]?' dn':'')}});
+    const done=pc>=m.n;
+    return`<div class="ml ${done?'dn':''}"><span class="mli">${m.i}</span><span class="mlt">${m.t}</span><span class="mld">${m.n}/${D.length}</span></div>`}).join('');
+  D.forEach((d,i)=>{const el=document.getElementById('c-'+i),row=document.getElementById('r-'+i);if(el&&row){el.className='ck'+(ck[i]?' on':'');const isToday=d.d===TODAY;row.className='it'+(ck[i]?' dn':'')+(isToday?' today':'')}});
   document.querySelectorAll('.wka').forEach(el=>{const w=el.dataset.w;let wr=0;D.forEach((d,i)=>{if(wk(d.d)===w&&!ck[i])wr+=d.a});el.textContent='¥'+wr.toFixed(0)});
 }
 
@@ -284,9 +336,11 @@ function render(){
       const items=weeks[w],we=new Date(w);we.setDate(we.getDate()+6);const wes=we.toISOString().slice(0,10),wt=items.reduce((s,d)=>s+d.a,0);
       h+=`<div class="wk"><div class="wkh"><span class="wkr">${fm(w)} — ${fm(wes)}</span><span class="wka" data-w="${w}">¥${wt.toFixed(0)}</span></div>`;
       items.forEach(it=>{
-        const dt=new Date(it.d),wd=WD[dt.getDay()],on=ck[it.i];let tag='';
-        if(it.t){const tc=it.t.includes('最后')||it.t.includes('结清')?'te':'tf';tag=`<span class="itg ${tc}">${it.t}</span>`}
-        h+=`<div class="it${on?' dn':''}" id="r-${it.i}" onclick="tog(${it.i})"><div class="ck${on?' on':''}" id="c-${it.i}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt ${DC[it.s]||''}"></span>${it.s}</div></div><div class="ia ${AC[it.s]||''}">¥${it.a.toFixed(2)}</div></div>`});
+        const dt=new Date(it.d),wd=WD[dt.getDay()],on=ck[it.i],isToday=it.d===TODAY;
+        let tag='';
+        if(isToday)tag=`<span class="itg tt">今天</span>`;
+        else if(it.t)tag=`<span class="itg te">${it.t}</span>`;
+        h+=`<div class="it${on?' dn':''}${isToday?' today':''}" id="r-${it.i}" onclick="tog(${it.i})"><div class="ck${on?' on':''}" id="c-${it.i}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt"></span>360借条</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`});
       h+=`</div>`});h+=`</div>`});
   app.innerHTML=h;
   document.getElementById('nv').innerHTML=months.map(mk=>{const[y,m]=mk.split('-');const yr=y==='2027'?"'27 ":'';return`<button class="ni" data-m="${mk}" onclick="goM('${mk}')">${yr}${+m}月</button>`}).join('');
