@@ -251,7 +251,7 @@ const D=[
 ];
 
 const WD=['日','一','二','三','四','五','六'];
-const TODAY=new Date().toISOString().slice(0,10);
+const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')})();
 
 const ML=[
   {n:10,i:"🚩",t:"完成 10 期"},
