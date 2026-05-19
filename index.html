@@ -41,7 +41,11 @@ body{
 .pbf{height:100%;background:#1c1917;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .pi{display:flex;justify-content:space-between;margin-top:5px;font-family:'DM Mono',monospace;font-size:11px;color:#a8a29e}
 
-.nv{display:flex;gap:4px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;position:sticky;top:210px;z-index:50;background:rgba(250,250,249,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #e7e5e4}
+.tgl{display:flex;justify-content:center;gap:8px;padding:8px 16px;background:rgba(250,250,249,0.95);border-bottom:1px solid #e7e5e4}
+.tgl-btn{padding:6px 14px;border:1px solid #e7e5e4;background:#fff;border-radius:100px;font-size:12px;font-weight:600;color:#78716c;cursor:pointer;font-family:'DM Sans',sans-serif}
+.tgl-btn.on{background:#1c1917;color:#fff;border-color:#1c1917}
+
+.nv{display:flex;gap:4px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;background:rgba(250,250,249,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #e7e5e4}
 .nv::-webkit-scrollbar{display:none}
 .ni{flex-shrink:0;padding:7px 18px;border-radius:100px;border:none;background:#f5f5f4;color:#a8a29e;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
 .ni.on{background:#1c1917;color:#fff}
@@ -55,8 +59,14 @@ body{
 .mlt{flex:1;font-size:13px;font-weight:700;color:#1c1917}
 .mld{font-family:'DM Mono',monospace;font-size:12px;color:#a8a29e}
 
+.alert{padding:0 16px 8px}
+.alert-card{background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.alert-icon{font-size:18px}
+.alert-text{flex:1;font-size:13px;font-weight:600;color:#991b1b}
+.alert-count{font-family:'DM Mono',monospace;font-size:12px;color:#dc2626;font-weight:700}
+
 .sec{padding:0 16px;margin-bottom:4px}
-.sh{display:flex;align-items:baseline;gap:10px;padding:20px 0 10px;position:sticky;top:252px;background:var(--bg);z-index:10}
+.sh{display:flex;align-items:baseline;gap:10px;padding:20px 0 10px}
 .sm{font-size:24px;font-weight:800;letter-spacing:-.5px;color:#1c1917}
 .st2{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#78716c;background:#f5f5f4;padding:3px 12px;border-radius:100px}
 
@@ -65,30 +75,37 @@ body{
 .wkr{font-size:13px;color:#78716c;font-weight:700}
 .wka{font-family:'DM Mono',monospace;font-size:15px;font-weight:800;color:#1c1917}
 
-.it{display:flex;align-items:center;padding:12px 16px;gap:12px;border-bottom:1px solid #f5f5f4;transition:all .2s;cursor:pointer;-webkit-user-select:none;user-select:none}
+.it{display:flex;align-items:center;padding:14px 16px;gap:12px;border-bottom:1px solid #f5f5f4;transition:all .2s;cursor:pointer;-webkit-user-select:none;user-select:none;min-height:60px}
 .it:last-child{border-bottom:none}
 .it:active{background:#f5f5f4}
-.it.dn{opacity:.3}
+.it.dn{opacity:.35}
 .it.dn .ia{text-decoration:line-through}
-.it.today{background:#fffbeb}
-.it.today.dn{background:transparent}
+.it.today{background:linear-gradient(90deg,#fffbeb,#fff 100%);border-left:3px solid #f59e0b}
+.it.today.dn{background:transparent;border-left:none}
+.it.overdue{background:linear-gradient(90deg,#fef2f2,#fff 100%);border-left:3px solid #dc2626}
+.it.overdue.dn{background:transparent;border-left:none}
 
-.ck{width:24px;height:24px;border-radius:50%;border:2px solid #d6d3d1;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff}
+.ck{width:26px;height:26px;border-radius:50%;border:2px solid #d6d3d1;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff;pointer-events:none}
 .ck.on{border-color:#16a34a;background:#16a34a}
 .ck.on::after{content:'';width:6px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);margin-top:-2px}
 
-.ib{flex:1;min-width:0}
-.itp{display:flex;align-items:center;gap:6px}
+.ib{flex:1;min-width:0;pointer-events:none}
+.itp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .idt{font-size:14px;font-weight:700;color:#1c1917}
 .idy{font-size:12px;color:#a8a29e;font-weight:600}
 .itg{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:700;letter-spacing:.3px}
 .tt{background:#fef3c7;color:#b45309}
 .te{background:#f0fdf4;color:#16a34a}
+.tov{background:#fef2f2;color:#dc2626}
 
 .is{font-size:12px;color:#a8a29e;margin-top:2px;display:flex;align-items:center;gap:5px;font-weight:600}
 .dt{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:#ff8c2e}
 
-.ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:#1c1917;flex-shrink:0}
+.ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:#1c1917;flex-shrink:0;pointer-events:none}
+
+.empty{text-align:center;padding:60px 20px;color:#a8a29e}
+.empty-i{font-size:48px;margin-bottom:12px}
+.empty-t{font-size:14px;font-weight:600}
 
 .rst{display:block;margin:40px auto 20px;padding:13px 32px;background:#fff;color:#dc2626;border:1px solid #e7e5e4;border-radius:100px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
 .shr{display:block;margin:10px auto;padding:11px 28px;background:#1c1917;color:#fff;border:none;border-radius:100px;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
@@ -100,7 +117,7 @@ body{
 </style>
 </head>
 <body>
-<div class="hd" id="hd">
+<div class="hd">
 <div class="brand">Payoff</div>
 <div class="hero"><div class="hero-n"><span class="u">¥</span><span id="hA">0</span></div><div class="hero-l">剩余待还</div></div>
 <div class="row">
@@ -110,12 +127,17 @@ body{
 </div>
 <div class="pw"><div class="pb"><div class="pbf" id="pB"></div></div><div class="pi"><span id="pP">0%</span><span id="pL">0/0</span></div></div>
 </div>
+<div class="tgl">
+  <button class="tgl-btn on" data-mode="active">仅待还</button>
+  <button class="tgl-btn" data-mode="all">显示全部</button>
+</div>
 <div class="nv" id="nv"></div>
+<div class="alert" id="alertBox" style="display:none"></div>
 <div class="mls" id="ms"></div>
 <div id="app"></div>
-<button class="shr" onclick="shareUrl()">复制带进度的链接</button>
-<button class="rst" onclick="resetAll()">重置所有记录</button>
-<button class="top" id="tp" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="shr" id="shareBtn">复制带进度的链接</button>
+<button class="rst" id="resetBtn">重置所有记录</button>
+<button class="top" id="tp">↑</button>
 <div class="toast" id="toast"></div>
 <script>
 const D=[
@@ -231,23 +253,22 @@ const D=[
 const WD=['日','一','二','三','四','五','六'];
 const TODAY=new Date().toISOString().slice(0,10);
 
-// 里程碑：完成第N期时点亮
 const ML=[
   {n:10,i:"🚩",t:"完成 10 期"},
-  {n:27,i:"🥉",t:"完成 1/4 ("+Math.round(107/4)+" 期)"},
-  {n:54,i:"🥈",t:"完成 1/2 ("+Math.round(107/2)+" 期)"},
-  {n:80,i:"🥇",t:"完成 3/4 ("+Math.round(107*3/4)+" 期)"},
+  {n:27,i:"🥉",t:"完成 1/4 (27 期)"},
+  {n:54,i:"🥈",t:"完成 1/2 (54 期)"},
+  {n:80,i:"🥇",t:"完成 3/4 (80 期)"},
   {n:97,i:"🔔",t:"还剩 10 期"},
   {n:107,i:"🎊",t:"全部结清"}
 ];
 
-// ===== 状态持久化：URL 优先，localStorage 兜底 =====
+let viewMode='active';
+
 function decodeFromUrl(){
   try{
     const u=new URL(location.href);
     const s=u.searchParams.get('s');
     if(!s)return null;
-    // s 是 base36 bitmask（每个字符代表5位）
     const bits=[];
     for(let i=0;i<s.length;i++){
       const v=parseInt(s[i],36);
@@ -270,11 +291,13 @@ function encodeToUrl(){
   return s;
 }
 function updateUrl(){
-  const s=encodeToUrl();
-  const u=new URL(location.href);
-  if(s.replace(/0+$/,''))u.searchParams.set('s',s);
-  else u.searchParams.delete('s');
-  history.replaceState(null,'',u.toString());
+  try{
+    const s=encodeToUrl();
+    const u=new URL(location.href);
+    if(s.replace(/0+$/,''))u.searchParams.set('s',s);
+    else u.searchParams.delete('s');
+    history.replaceState(null,'',u.toString());
+  }catch(e){}
 }
 
 let ck={};
@@ -290,25 +313,46 @@ function sv(){
   try{localStorage.setItem('po6',JSON.stringify(ck))}catch(e){}
   updateUrl();
 }
-function wk(ds){const d=new Date(ds),w=d.getDay(),df=(w<4)?-(w+3):-(w-4);const s=new Date(d);s.setDate(s.getDate()+df);return s.toISOString().slice(0,10)}
+function wk(ds){const d=new Date(ds+'T00:00:00'),w=d.getDay(),df=(w<4)?-(w+3):-(w-4);const s=new Date(d);s.setDate(s.getDate()+df);return s.toISOString().slice(0,10)}
 function fm(ds){const[y,m,d]=ds.split('-');return`${+m}/${+d}`}
 function gm(ds){return ds.slice(0,7)}
-function tog(i){ck[i]=!ck[i];if(!ck[i])delete ck[i];sv();upd()}
-function resetAll(){if(confirm('确定清除所有记录？')){ck={};sv();upd()}}
+function tog(i){
+  ck[i]=!ck[i];
+  if(!ck[i])delete ck[i];
+  sv();
+  render();
+}
+function resetAll(){if(confirm('确定清除所有记录？')){ck={};sv();render()}}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
 function shareUrl(){
   updateUrl();
   const url=location.href;
-  if(navigator.clipboard){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
     navigator.clipboard.writeText(url).then(()=>showToast('链接已复制')).catch(()=>{prompt('复制此链接：',url)})
   }else{prompt('复制此链接：',url)}
 }
 
-function upd(){
-  const tot=D.reduce((s,d)=>s+d.a,0);let paid=0,pc=0;
+function getStatus(it){
+  if(ck[it.i])return 'done';
+  if(it.d===TODAY)return 'today';
+  if(it.d<TODAY)return 'overdue';
+  return 'future';
+}
+
+function shouldShow(it){
+  if(viewMode==='all')return true;
+  const s=getStatus(it);
+  if(s==='done'&&it.d<TODAY)return false;
+  return true;
+}
+
+function updStats(){
+  const tot=D.reduce((s,d)=>s+d.a,0);
+  let paid=0,pc=0;
   D.forEach((d,i)=>{if(ck[i]){paid+=d.a;pc++}});
   const rem=tot-paid,now=new Date(),cm=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-  let mr=0;D.forEach((d,i)=>{if(gm(d.d)===cm&&!ck[i])mr+=d.a});
+  let mr=0;
+  D.forEach((d,i)=>{if(gm(d.d)===cm&&!ck[i])mr+=d.a});
   document.getElementById('hA').textContent=rem.toFixed(0);
   document.getElementById('sP').textContent='¥'+paid.toFixed(0);
   document.getElementById('sM').textContent='¥'+mr.toFixed(0);
@@ -319,36 +363,111 @@ function upd(){
   document.getElementById('pL').textContent=pc+'/'+D.length;
   document.getElementById('ms').innerHTML=ML.map(m=>{
     const done=pc>=m.n;
-    return`<div class="ml ${done?'dn':''}"><span class="mli">${m.i}</span><span class="mlt">${m.t}</span><span class="mld">${m.n}/${D.length}</span></div>`}).join('');
-  D.forEach((d,i)=>{const el=document.getElementById('c-'+i),row=document.getElementById('r-'+i);if(el&&row){el.className='ck'+(ck[i]?' on':'');const isToday=d.d===TODAY;row.className='it'+(ck[i]?' dn':'')+(isToday?' today':'')}});
-  document.querySelectorAll('.wka').forEach(el=>{const w=el.dataset.w;let wr=0;D.forEach((d,i)=>{if(wk(d.d)===w&&!ck[i])wr+=d.a});el.textContent='¥'+wr.toFixed(0)});
+    return`<div class="ml ${done?'dn':''}"><span class="mli">${m.i}</span><span class="mlt">${m.t}</span><span class="mld">${m.n}/${D.length}</span></div>`
+  }).join('');
+
+  let overdueCount=0,overdueAmt=0;
+  D.forEach((d,i)=>{if(!ck[i]&&d.d<TODAY){overdueCount++;overdueAmt+=d.a}});
+  const ab=document.getElementById('alertBox');
+  if(overdueCount>0){
+    ab.style.display='block';
+    ab.innerHTML=`<div class="alert-card"><span class="alert-icon">⚠️</span><span class="alert-text">有 ${overdueCount} 期逾期未还</span><span class="alert-count">¥${overdueAmt.toFixed(0)}</span></div>`;
+  }else{
+    ab.style.display='none';
+  }
 }
 
 function render(){
+  updStats();
+  const visibleItems=D.map((d,i)=>({...d,i})).filter(shouldShow);
   const weeks={},mmap={};
-  D.forEach((d,i)=>{const w=wk(d.d);if(!weeks[w])weeks[w]=[];weeks[w].push({...d,i});const m=gm(d.d);if(!mmap[m])mmap[m]=[];if(!mmap[m].includes(w))mmap[m].push(w)});
-  const app=document.getElementById('app'),months=Object.keys(mmap).sort();let h='';
+  visibleItems.forEach(it=>{
+    const w=wk(it.d);
+    if(!weeks[w])weeks[w]=[];
+    weeks[w].push(it);
+    const m=gm(it.d);
+    if(!mmap[m])mmap[m]=[];
+    if(!mmap[m].includes(w))mmap[m].push(w);
+  });
+  const app=document.getElementById('app'),months=Object.keys(mmap).sort();
+  if(months.length===0){
+    app.innerHTML=`<div class="empty"><div class="empty-i">🎉</div><div class="empty-t">没有待还的款项了</div></div>`;
+    document.getElementById('nv').innerHTML='';
+    return;
+  }
+  let h='';
   months.forEach(mk=>{
-    const[y,m]=mk.split('-');const yr=y==='2027'?"'27 ":'';const ml=`${yr}${+m}月`;
-    const mt=D.filter(d=>gm(d.d)===mk).reduce((s,d)=>s+d.a,0);
-    h+=`<div class="sec" id="m-${mk}"><div class="sh"><span class="sm">${ml}</span><span class="st2">¥${mt.toFixed(0)}</span></div>`;
+    const[y,m]=mk.split('-');
+    const yr=y==='2027'?"'27 ":'';
+    const ml=`${yr}${+m}月`;
+    const mt=D.filter((d,i)=>gm(d.d)===mk&&!ck[i]).reduce((s,d)=>s+d.a,0);
+    const mLabel=mt>0?`¥${mt.toFixed(0)}`:'已完成';
+    h+=`<div class="sec" id="m-${mk}"><div class="sh"><span class="sm">${ml}</span><span class="st2">${mLabel}</span></div>`;
     mmap[mk].sort().forEach(w=>{
-      const items=weeks[w],we=new Date(w);we.setDate(we.getDate()+6);const wes=we.toISOString().slice(0,10),wt=items.reduce((s,d)=>s+d.a,0);
-      h+=`<div class="wk"><div class="wkh"><span class="wkr">${fm(w)} — ${fm(wes)}</span><span class="wka" data-w="${w}">¥${wt.toFixed(0)}</span></div>`;
+      const items=weeks[w];
+      const we=new Date(w+'T00:00:00');
+      we.setDate(we.getDate()+6);
+      const wes=we.toISOString().slice(0,10);
+      const wt=items.filter(it=>!ck[it.i]).reduce((s,d)=>s+d.a,0);
+      h+=`<div class="wk"><div class="wkh"><span class="wkr">${fm(w)} — ${fm(wes)}</span><span class="wka">¥${wt.toFixed(0)}</span></div>`;
       items.forEach(it=>{
-        const dt=new Date(it.d),wd=WD[dt.getDay()],on=ck[it.i],isToday=it.d===TODAY;
+        const dt=new Date(it.d+'T00:00:00'),wd=WD[dt.getDay()];
+        const status=getStatus(it),on=ck[it.i];
+        let cls='it';
+        if(on)cls+=' dn';
+        if(status==='today')cls+=' today';
+        else if(status==='overdue')cls+=' overdue';
         let tag='';
-        if(isToday)tag=`<span class="itg tt">今天</span>`;
+        if(status==='today')tag=`<span class="itg tt">今天</span>`;
+        else if(status==='overdue')tag=`<span class="itg tov">逾期</span>`;
         else if(it.t)tag=`<span class="itg te">${it.t}</span>`;
-        h+=`<div class="it${on?' dn':''}${isToday?' today':''}" id="r-${it.i}" onclick="tog(${it.i})"><div class="ck${on?' on':''}" id="c-${it.i}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt"></span>360借条</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`});
-      h+=`</div>`});h+=`</div>`});
+        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt"></span>360借条</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
+      });
+      h+=`</div>`;
+    });
+    h+=`</div>`;
+  });
   app.innerHTML=h;
-  document.getElementById('nv').innerHTML=months.map(mk=>{const[y,m]=mk.split('-');const yr=y==='2027'?"'27 ":'';return`<button class="ni" data-m="${mk}" onclick="goM('${mk}')">${yr}${+m}月</button>`}).join('');
-  upd();updN();
+  document.getElementById('nv').innerHTML=months.map(mk=>{
+    const[y,m]=mk.split('-');
+    const yr=y==='2027'?"'27 ":'';
+    return`<button class="ni" data-m="${mk}">${yr}${+m}月</button>`;
+  }).join('');
 }
-function goM(mk){const el=document.getElementById('m-'+mk);if(el){const off=document.getElementById('hd').offsetHeight+document.getElementById('nv').offsetHeight+10;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-off,behavior:'smooth'})}}
-function updN(){const btns=document.querySelectorAll('.ni'),off=document.getElementById('hd').offsetHeight+document.getElementById('nv').offsetHeight+60;let ac=null;document.querySelectorAll('.sec[id^="m-"]').forEach(s=>{if(s.getBoundingClientRect().top<off+100)ac=s.id.replace('m-','')});btns.forEach(b=>b.classList.toggle('on',b.dataset.m===ac));const ab=document.querySelector('.ni.on');if(ab){const n=document.getElementById('nv');n.scrollTo({left:ab.offsetLeft-n.offsetWidth/2+ab.offsetWidth/2,behavior:'smooth'})}}
-let st;window.addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(updN,50);document.getElementById('tp').classList.toggle('show',window.scrollY>400)});
+
+document.body.addEventListener('click',function(e){
+  const tglBtn=e.target.closest('.tgl-btn');
+  if(tglBtn){
+    document.querySelectorAll('.tgl-btn').forEach(b=>b.classList.remove('on'));
+    tglBtn.classList.add('on');
+    viewMode=tglBtn.dataset.mode;
+    render();
+    return;
+  }
+  const niBtn=e.target.closest('.ni');
+  if(niBtn){
+    const mk=niBtn.dataset.m;
+    const el=document.getElementById('m-'+mk);
+    if(el){
+      window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-180,behavior:'smooth'});
+    }
+    return;
+  }
+  const itEl=e.target.closest('.it');
+  if(itEl){
+    const idx=parseInt(itEl.dataset.idx);
+    if(!isNaN(idx))tog(idx);
+    return;
+  }
+  if(e.target.id==='resetBtn'){resetAll();return}
+  if(e.target.id==='shareBtn'){shareUrl();return}
+  if(e.target.id==='tp'){window.scrollTo({top:0,behavior:'smooth'});return}
+});
+
+window.addEventListener('scroll',function(){
+  document.getElementById('tp').classList.toggle('show',window.scrollY>400);
+});
+
 render();
 </script>
 </body>
