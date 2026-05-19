@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#fafaf9">
 <title>PAYOFF</title>
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiUEFZT0ZGIiwic2hvcnRfbmFtZSI6IlBheW9mZiIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI2ZhZmFmOSIsInRoZW1lX2NvbG9yIjoiI2ZhZmFmOSIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeU1EQWdNakF3SWo0OGNtVmpkQ0IzYVdSMGFEMGlNakF3SWlCb1pXbG5hSFE5SWpJd01DSWdabWxzYkQwaUl6RmpNVGt4TnlJdlBqeDBaWGgwSUhnOUlqRXdNQ0lnZVQwaU1USTRJaUJtYjI1MExYTnBlbVU5SWpZd0lpQm1iMjUwTFdaaGJXbHNlVDBpYzNsemRHVnRMV1ZwSWlCbWIyNTBMWGRsYVdkb2REMGlPREF3SWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElpQm1hV3hzUFNJalltRmlZbUUySWo1Q1BDOTBaWGgwUGp3dmMzWm5QZz09IiwidHlwZSI6ImltYWdlL3N2Zyt4bWwiLCJzaXplcyI6IjUxMng1MTIifV19">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzFjMTkxNyIvPjx0ZXh0IHg9IjEwMCIgeT0iMTI4IiBmb250LXNpemU9IjYwIiBmb250LWZhbWlseT0ic3lzdGVtLXVpIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYmFiYmE2Ij5CPC90ZXh0Pjwvc3ZnPg==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -26,10 +29,16 @@ body{
 .hd{position:sticky;top:0;z-index:100;background:rgba(250,250,249,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid #e7e5e4;padding:14px 16px 12px}
 .brand{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:#a8a29e;text-align:center;margin-bottom:12px}
 
-.hero{background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:22px 16px;text-align:center;margin-bottom:10px}
+.hero{background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:22px 16px;text-align:center;margin-bottom:10px;position:relative}
 .hero-n{font-family:'DM Mono',monospace;font-size:48px;font-weight:800;letter-spacing:-2px;color:#1c1917;line-height:1}
 .hero-n .u{font-size:24px;font-weight:500;opacity:.4;margin-right:2px}
 .hero-l{font-size:11px;color:#a8a29e;margin-top:6px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+
+.nextpay{margin-top:14px;padding-top:14px;border-top:1px dashed #e7e5e4;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.nextpay-l{color:#78716c;font-weight:600}
+.nextpay-r{font-family:'DM Mono',monospace;font-weight:700;color:#1c1917}
+.nextpay-r .npd{color:#dc2626;margin-right:8px}
+.nextpay-r .npd.soon{background:#fef2f2;padding:2px 6px;border-radius:4px}
 
 .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .box{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:12px 6px;text-align:center}
@@ -50,8 +59,17 @@ body{
 .ni{flex-shrink:0;padding:7px 18px;border-radius:100px;border:none;background:#f5f5f4;color:#a8a29e;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
 .ni.on{background:#1c1917;color:#fff}
 
-.mls{padding:10px 16px 4px}
-.ml{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1px solid #e7e5e4;border-radius:12px;margin-bottom:6px;transition:all .3s}
+/* 折叠的里程碑 */
+.mls-wrap{padding:10px 16px 4px}
+.mls-bar{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:10px 14px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.mls-bar-l{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#78716c}
+.mls-bar-chip{display:inline-flex;align-items:center;gap:3px;background:#f5f5f4;padding:3px 8px;border-radius:100px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:#78716c}
+.mls-bar-chip.done{background:#f0fdf4;color:#16a34a}
+.mls-bar-arrow{font-size:12px;color:#a8a29e;transition:transform .2s}
+.mls-bar.open .mls-bar-arrow{transform:rotate(180deg)}
+.mls-list{padding-top:8px;display:none}
+.mls-list.open{display:block}
+.ml{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1px solid #e7e5e4;border-radius:12px;margin-bottom:6px}
 .ml.dn{background:#f0fdf4;border-color:#bbf7d0}
 .ml.dn .mlt{color:#a8a29e;text-decoration:line-through}
 .ml.dn .mld{color:#a8a29e}
@@ -94,7 +112,7 @@ body{
 .idt{font-size:14px;font-weight:700;color:#1c1917}
 .idy{font-size:12px;color:#a8a29e;font-weight:600}
 .itg{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:700;letter-spacing:.3px}
-.tt{background:#fef3c7;color:#b45309}
+.tt{background:#dbeafe;color:#1d4ed8}
 .te{background:#f0fdf4;color:#16a34a}
 .tov{background:#fef2f2;color:#dc2626}
 
@@ -119,7 +137,14 @@ body{
 <body>
 <div class="hd">
 <div class="brand">Payoff</div>
-<div class="hero"><div class="hero-n"><span class="u">¥</span><span id="hA">0</span></div><div class="hero-l">剩余待还</div></div>
+<div class="hero">
+  <div class="hero-n"><span class="u">¥</span><span id="hA">0</span></div>
+  <div class="hero-l">剩余待还</div>
+  <div class="nextpay" id="nextpay" style="display:none">
+    <span class="nextpay-l">下一笔</span>
+    <span class="nextpay-r" id="nextpayInfo"></span>
+  </div>
+</div>
 <div class="row">
 <div class="box"><div class="box-v" id="sP">¥0</div><div class="box-l">已还</div></div>
 <div class="box"><div class="box-v" id="sM">¥0</div><div class="box-l">本月</div></div>
@@ -133,7 +158,13 @@ body{
 </div>
 <div class="nv" id="nv"></div>
 <div class="alert" id="alertBox" style="display:none"></div>
-<div class="mls" id="ms"></div>
+<div class="mls-wrap">
+  <div class="mls-bar" id="mlsBar">
+    <div class="mls-bar-l"><span>🏁 里程碑</span><span class="mls-bar-chip" id="mlsChip">0/6</span></div>
+    <span class="mls-bar-arrow">▼</span>
+  </div>
+  <div class="mls-list" id="ms"></div>
+</div>
 <div id="app"></div>
 <button class="shr" id="shareBtn">复制带进度的链接</button>
 <button class="rst" id="resetBtn">重置所有记录</button>
@@ -263,6 +294,7 @@ const ML=[
 ];
 
 let viewMode='active';
+let mlsOpen=false;
 
 function decodeFromUrl(){
   try{
@@ -316,9 +348,12 @@ function sv(){
 function wk(ds){const d=new Date(ds+'T00:00:00'),w=d.getDay(),df=(w<4)?-(w+3):-(w-4);const s=new Date(d);s.setDate(s.getDate()+df);return s.toISOString().slice(0,10)}
 function fm(ds){const[y,m,d]=ds.split('-');return`${+m}/${+d}`}
 function gm(ds){return ds.slice(0,7)}
+function daysBetween(a,b){const da=new Date(a+'T00:00:00'),db=new Date(b+'T00:00:00');return Math.round((db-da)/86400000)}
+function vibrate(ms){try{if(navigator.vibrate)navigator.vibrate(ms)}catch(e){}}
 function tog(i){
   ck[i]=!ck[i];
   if(!ck[i])delete ck[i];
+  vibrate(15);
   sv();
   render();
 }
@@ -346,6 +381,14 @@ function shouldShow(it){
   return true;
 }
 
+// 一周归属哪个月：按这一周（周四到周三）的"中位"日期所在月
+// 简化处理：用周中的周日（即起始周四 +3天）所在月作为归属月
+function weekToMonth(weekStart){
+  const d=new Date(weekStart+'T00:00:00');
+  d.setDate(d.getDate()+3);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+
 function updStats(){
   const tot=D.reduce((s,d)=>s+d.a,0);
   let paid=0,pc=0;
@@ -361,6 +404,33 @@ function updStats(){
   document.getElementById('pB').style.width=pct+'%';
   document.getElementById('pP').textContent=pct.toFixed(1)+'%';
   document.getElementById('pL').textContent=pc+'/'+D.length;
+
+  // 下一笔
+  const np=document.getElementById('nextpay');
+  const npInfo=document.getElementById('nextpayInfo');
+  let nextItem=null;
+  for(let i=0;i<D.length;i++){
+    if(!ck[i]&&D[i].d>=TODAY){nextItem={...D[i],i};break}
+  }
+  if(nextItem){
+    const days=daysBetween(TODAY,nextItem.d);
+    const wd=WD[new Date(nextItem.d+'T00:00:00').getDay()];
+    let dayLabel;
+    if(days===0)dayLabel='<span class="npd soon">就在今天</span>';
+    else if(days===1)dayLabel='<span class="npd">明天</span>';
+    else if(days<=3)dayLabel=`<span class="npd soon">${days} 天后</span>`;
+    else dayLabel=`<span style="color:#78716c">${days} 天后</span>`;
+    npInfo.innerHTML=`${dayLabel} ${fm(nextItem.d)} 周${wd} · ¥${nextItem.a.toFixed(2)}`;
+    np.style.display='flex';
+  }else{
+    np.style.display='none';
+  }
+
+  // 里程碑
+  let mlDoneCount=0;
+  ML.forEach(m=>{if(pc>=m.n)mlDoneCount++});
+  document.getElementById('mlsChip').textContent=mlDoneCount+'/'+ML.length;
+  document.getElementById('mlsChip').className='mls-bar-chip'+(mlDoneCount===ML.length?' done':'');
   document.getElementById('ms').innerHTML=ML.map(m=>{
     const done=pc>=m.n;
     return`<div class="ml ${done?'dn':''}"><span class="mli">${m.i}</span><span class="mlt">${m.t}</span><span class="mld">${m.n}/${D.length}</span></div>`
@@ -380,15 +450,23 @@ function updStats(){
 function render(){
   updStats();
   const visibleItems=D.map((d,i)=>({...d,i})).filter(shouldShow);
-  const weeks={},mmap={};
+
+  // 按周分组
+  const weeks={};
   visibleItems.forEach(it=>{
     const w=wk(it.d);
     if(!weeks[w])weeks[w]=[];
     weeks[w].push(it);
-    const m=gm(it.d);
-    if(!mmap[m])mmap[m]=[];
-    if(!mmap[m].includes(w))mmap[m].push(w);
   });
+
+  // 每周归属一个月，避免跨月重复
+  const mmap={};
+  Object.keys(weeks).forEach(w=>{
+    const m=weekToMonth(w);
+    if(!mmap[m])mmap[m]=[];
+    mmap[m].push(w);
+  });
+
   const app=document.getElementById('app'),months=Object.keys(mmap).sort();
   if(months.length===0){
     app.innerHTML=`<div class="empty"><div class="empty-i">🎉</div><div class="empty-t">没有待还的款项了</div></div>`;
@@ -400,7 +478,11 @@ function render(){
     const[y,m]=mk.split('-');
     const yr=y==='2027'?"'27 ":'';
     const ml=`${yr}${+m}月`;
-    const mt=D.filter((d,i)=>gm(d.d)===mk&&!ck[i]).reduce((s,d)=>s+d.a,0);
+    // 这个月份归属的所有周里，未还的总额
+    let mt=0;
+    mmap[mk].forEach(w=>{
+      weeks[w].forEach(it=>{if(!ck[it.i])mt+=it.a});
+    });
     const mLabel=mt>0?`¥${mt.toFixed(0)}`:'已完成';
     h+=`<div class="sec" id="m-${mk}"><div class="sh"><span class="sm">${ml}</span><span class="st2">${mLabel}</span></div>`;
     mmap[mk].sort().forEach(w=>{
@@ -433,6 +515,12 @@ function render(){
     const yr=y==='2027'?"'27 ":'';
     return`<button class="ni" data-m="${mk}">${yr}${+m}月</button>`;
   }).join('');
+
+  // 维持里程碑开关状态
+  if(mlsOpen){
+    document.getElementById('mlsBar').classList.add('open');
+    document.getElementById('ms').classList.add('open');
+  }
 }
 
 document.body.addEventListener('click',function(e){
@@ -451,6 +539,13 @@ document.body.addEventListener('click',function(e){
     if(el){
       window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-180,behavior:'smooth'});
     }
+    return;
+  }
+  const mlsBar=e.target.closest('#mlsBar');
+  if(mlsBar){
+    mlsOpen=!mlsOpen;
+    mlsBar.classList.toggle('open',mlsOpen);
+    document.getElementById('ms').classList.toggle('open',mlsOpen);
     return;
   }
   const itEl=e.target.closest('.it');
