@@ -149,20 +149,24 @@ body{
 .up-amt{flex:1;text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:var(--text);pointer-events:none}
 .up-empty{text-align:center;padding:14px 0;color:var(--text3);font-size:12px}
 
-.tgl{display:flex;justify-content:center;gap:8px;padding:6px 16px;background:var(--nv-bg);border-bottom:1px solid var(--border)}
+.tgl{display:flex;justify-content:center;gap:8px;padding:8px 16px 4px;background:var(--nv-bg)}
 .tgl-btn{padding:5px 12px;border:1px solid var(--border);background:var(--card);border-radius:100px;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif}
 .tgl-btn.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 
-.nv{display:flex;gap:4px;padding:8px 16px;overflow-x:auto;scrollbar-width:none;background:var(--nv-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nv{display:flex;gap:4px;padding:6px 16px 8px;overflow-x:auto;scrollbar-width:none;background:var(--nv-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nv::-webkit-scrollbar{display:none}
 .ni{flex-shrink:0;padding:6px 14px;border-radius:100px;border:none;background:var(--chip);color:var(--text3);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
 .ni.on{background:var(--text);color:var(--bg)}
 
-.pf{display:flex;gap:6px;padding:8px 16px;overflow-x:auto;scrollbar-width:none;background:var(--nv-bg);border-bottom:1px solid var(--border)}
+.pf{display:flex;gap:6px;padding:2px 16px 8px;overflow-x:auto;scrollbar-width:none;background:var(--nv-bg)}
 .pf::-webkit-scrollbar{display:none}
-.pfb{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;border:1px solid var(--border);background:var(--card);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
-.pfb.on{background:var(--text);color:var(--bg);border-color:var(--text)}
-.pfb-amt{font-family:'DM Mono',monospace;font-weight:600;opacity:.6;font-size:11px}
+.pfb{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.pfb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--pc,var(--text3))}
+.pfb.on{background:var(--pc-bg,var(--text));border-color:var(--pc,var(--text));color:var(--pc,var(--bg))}
+.pfb.on .pfb-dot{background:var(--pc,var(--bg))}
+.pfb[data-p="all"].on{background:var(--text);color:var(--bg)}
+.pfb[data-p="all"].on .pfb-dot{background:var(--bg)}
+.pfb-amt{font-family:'DM Mono',monospace;font-weight:600;opacity:.65;font-size:10px}
 
 .alert{padding:0 16px 8px}
 .alert-card{background:var(--od-card-bg);border:1px solid var(--od-card-border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px}
@@ -204,7 +208,7 @@ body{
 .tov{background:var(--od-tag-bg);color:var(--od-tag-c)}
 
 .is{font-size:12px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:5px;font-weight:600}
-.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--dot)}
+.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--pc,var(--dot))}
 
 .ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text);flex-shrink:0;pointer-events:none;font-variant-numeric:tabular-nums}
 
@@ -424,6 +428,14 @@ const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMont
 let viewMode='active';
 let platformMode='all';
 const PLATFORMS=[...new Set(D.map(d=>d.p))];
+const PCOLORS=['#f97316','#7c3aed','#0d9488','#e11d48'];
+const PCOLOR={};
+PLATFORMS.forEach((p,i)=>{PCOLOR[p]=PCOLORS[i%PCOLORS.length]});
+function pcBg(hex){
+  const n=parseInt(hex.slice(1),16);
+  const r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  return`rgba(${r},${g},${b},0.14)`;
+}
 let theme=localStorage.getItem('po-theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 
 function applyTheme(){
@@ -605,8 +617,11 @@ function renderPlatformFilter(){
   const totals={};
   let allRem=0;
   D.forEach((d,i)=>{if(!ck[i]){totals[d.p]=(totals[d.p]||0)+d.a;allRem+=d.a}});
-  let h=`<button class="pfb${platformMode==='all'?' on':''}" data-p="all">全部<span class="pfb-amt">¥${allRem.toFixed(0)}</span></button>`;
-  h+=PLATFORMS.map(p=>`<button class="pfb${platformMode===p?' on':''}" data-p="${p}">${p}<span class="pfb-amt">¥${(totals[p]||0).toFixed(0)}</span></button>`).join('');
+  let h=`<button class="pfb${platformMode==='all'?' on':''}" data-p="all"><span class="pfb-dot"></span>全部<span class="pfb-amt">¥${allRem.toFixed(0)}</span></button>`;
+  h+=PLATFORMS.map(p=>{
+    const c=PCOLOR[p];
+    return`<button class="pfb${platformMode===p?' on':''}" data-p="${p}" style="--pc:${c};--pc-bg:${pcBg(c)}"><span class="pfb-dot"></span>${p}<span class="pfb-amt">¥${(totals[p]||0).toFixed(0)}</span></button>`;
+  }).join('');
   pf.innerHTML=h;
 }
 
@@ -788,7 +803,7 @@ function render(animate){
         if(status==='today')tag=`<span class="itg tt">今天</span>`;
         else if(status==='overdue')tag=`<span class="itg tov">逾期</span>`;
         else if(it.t)tag=`<span class="itg te">${it.t}</span>`;
-        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt"></span>${it.p}</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
+        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt" style="--pc:${PCOLOR[it.p]}"></span>${it.p}</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
       });
       h+=`</div>`;
     });
