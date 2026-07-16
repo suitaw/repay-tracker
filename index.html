@@ -160,13 +160,13 @@ body{
 
 .pf{display:flex;gap:6px;padding:2px 16px 8px;overflow-x:auto;scrollbar-width:none;background:var(--nv-bg)}
 .pf::-webkit-scrollbar{display:none}
-.pfb{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
-.pfb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--pc,var(--text3))}
-.pfb.on{background:var(--pc-bg,var(--text));border-color:var(--pc,var(--text));color:var(--pc,var(--bg))}
-.pfb.on .pfb-dot{background:var(--pc,var(--bg))}
+.pfb{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.pfb.on{background:var(--pc-bg,var(--chip));border-color:var(--pc,var(--text));color:var(--text)}
 .pfb[data-p="all"].on{background:var(--text);color:var(--bg)}
-.pfb[data-p="all"].on .pfb-dot{background:var(--bg)}
 .pfb-amt{font-family:'DM Mono',monospace;font-weight:600;opacity:.65;font-size:10px}
+
+.pico{display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:5px;font-weight:800;line-height:1;letter-spacing:-.3px;border:1px solid rgba(0,0,0,.06)}
+[data-theme="dark"] .pico{border-color:rgba(255,255,255,.1)}
 
 .alert{padding:0 16px 8px}
 .alert-card{background:var(--od-card-bg);border:1px solid var(--od-card-border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px}
@@ -208,7 +208,7 @@ body{
 .tov{background:var(--od-tag-bg);color:var(--od-tag-c)}
 
 .is{font-size:12px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:5px;font-weight:600}
-.dt{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--pc,var(--dot))}
+.dt.pico{width:18px;height:18px;font-size:8px}
 
 .ia{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--text);flex-shrink:0;pointer-events:none;font-variant-numeric:tabular-nums}
 
@@ -428,13 +428,21 @@ const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMont
 let viewMode='active';
 let platformMode='all';
 const PLATFORMS=[...new Set(D.map(d=>d.p))];
-const PCOLORS=['#f97316','#7c3aed','#0d9488','#e11d48'];
-const PCOLOR={};
-PLATFORMS.forEach((p,i)=>{PCOLOR[p]=PCOLORS[i%PCOLORS.length]});
+const PICON={
+  '360借条':{bg:'#ffffff',fg:'#ff7a00',accent:'#ff7a00',label:'360',chipLabel:'360'},
+  '美团':{bg:'#ffd100',fg:'#1a1a1a',accent:'#e0b400',label:'美团',chipLabel:'美'}
+};
+const FALLBACK_COLORS=['#7c3aed','#0d9488','#e11d48','#2563eb'];
+let fbi=0;
+function iconOf(p){
+  if(PICON[p])return PICON[p];
+  const c=FALLBACK_COLORS[fbi%FALLBACK_COLORS.length];fbi++;
+  return PICON[p]={bg:c,fg:'#fff',accent:c,label:p.slice(0,2),chipLabel:p.slice(0,1)};
+}
 function pcBg(hex){
-  const n=parseInt(hex.slice(1),16);
+  const n=parseInt(hex.replace('#',''),16);
   const r=(n>>16)&255,g=(n>>8)&255,b=n&255;
-  return`rgba(${r},${g},${b},0.14)`;
+  return`rgba(${r},${g},${b},0.16)`;
 }
 let theme=localStorage.getItem('po-theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 
@@ -617,10 +625,10 @@ function renderPlatformFilter(){
   const totals={};
   let allRem=0;
   D.forEach((d,i)=>{if(!ck[i]){totals[d.p]=(totals[d.p]||0)+d.a;allRem+=d.a}});
-  let h=`<button class="pfb${platformMode==='all'?' on':''}" data-p="all"><span class="pfb-dot"></span>全部<span class="pfb-amt">¥${allRem.toFixed(0)}</span></button>`;
+  let h=`<button class="pfb${platformMode==='all'?' on':''}" data-p="all">全部<span class="pfb-amt">¥${allRem.toFixed(0)}</span></button>`;
   h+=PLATFORMS.map(p=>{
-    const c=PCOLOR[p];
-    return`<button class="pfb${platformMode===p?' on':''}" data-p="${p}" style="--pc:${c};--pc-bg:${pcBg(c)}"><span class="pfb-dot"></span>${p}<span class="pfb-amt">¥${(totals[p]||0).toFixed(0)}</span></button>`;
+    const ic=iconOf(p);
+    return`<button class="pfb${platformMode===p?' on':''}" data-p="${p}" style="--pc:${ic.accent};--pc-bg:${pcBg(ic.accent)}"><span class="pico" style="width:14px;height:14px;font-size:6px;background:${ic.bg};color:${ic.fg}">${ic.chipLabel}</span>${p}<span class="pfb-amt">¥${(totals[p]||0).toFixed(0)}</span></button>`;
   }).join('');
   pf.innerHTML=h;
 }
@@ -803,7 +811,8 @@ function render(animate){
         if(status==='today')tag=`<span class="itg tt">今天</span>`;
         else if(status==='overdue')tag=`<span class="itg tov">逾期</span>`;
         else if(it.t)tag=`<span class="itg te">${it.t}</span>`;
-        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt" style="--pc:${PCOLOR[it.p]}"></span>${it.p}</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
+        const ic=iconOf(it.p);
+        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt pico" style="background:${ic.bg};color:${ic.fg}">${ic.label}</span>${it.p}</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
       });
       h+=`</div>`;
     });
