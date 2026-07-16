@@ -428,8 +428,14 @@ const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMont
 let viewMode='active';
 let platformMode='all';
 const PLATFORMS=[...new Set(D.map(d=>d.p))];
+let svgIconSeq=0;
+function icon360Svg(){
+  svgIconSeq++;
+  const gid='g360_'+svgIconSeq;
+  return`<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${gid}" x1="15%" y1="10%" x2="85%" y2="90%"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#ff9d00"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="#fff8ec"/><circle cx="50" cy="50" r="42" fill="url(#${gid})"/><text x="50" y="67" text-anchor="middle" font-family="Arial,'PingFang SC',sans-serif" font-weight="900" font-size="58" fill="#0aa550">¥</text></svg>`;
+}
 const PICON={
-  '360借条':{bg:'#ffffff',fg:'#ff7a00',accent:'#ff7a00',label:'360',chipLabel:'360'},
+  '360借条':{svg:icon360Svg,accent:'#ff9d00'},
   '美团':{bg:'#ffd100',fg:'#1a1a1a',accent:'#e0b400',label:'美团',chipLabel:'美'}
 };
 const FALLBACK_COLORS=['#7c3aed','#0d9488','#e11d48','#2563eb'];
@@ -628,7 +634,8 @@ function renderPlatformFilter(){
   let h=`<button class="pfb${platformMode==='all'?' on':''}" data-p="all">全部<span class="pfb-amt">¥${allRem.toFixed(0)}</span></button>`;
   h+=PLATFORMS.map(p=>{
     const ic=iconOf(p);
-    return`<button class="pfb${platformMode===p?' on':''}" data-p="${p}" style="--pc:${ic.accent};--pc-bg:${pcBg(ic.accent)}"><span class="pico" style="width:14px;height:14px;font-size:6px;background:${ic.bg};color:${ic.fg}">${ic.chipLabel}</span>${p}<span class="pfb-amt">¥${(totals[p]||0).toFixed(0)}</span></button>`;
+    const chipStyle=`width:14px;height:14px;font-size:6px${ic.svg?'':`;background:${ic.bg};color:${ic.fg}`}`;
+    return`<button class="pfb${platformMode===p?' on':''}" data-p="${p}" style="--pc:${ic.accent};--pc-bg:${pcBg(ic.accent)}"><span class="pico" style="${chipStyle}">${ic.svg?ic.svg():ic.chipLabel}</span>${p}<span class="pfb-amt">¥${(totals[p]||0).toFixed(0)}</span></button>`;
   }).join('');
   pf.innerHTML=h;
 }
@@ -812,7 +819,8 @@ function render(animate){
         else if(status==='overdue')tag=`<span class="itg tov">逾期</span>`;
         else if(it.t)tag=`<span class="itg te">${it.t}</span>`;
         const ic=iconOf(it.p);
-        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt pico" style="background:${ic.bg};color:${ic.fg}">${ic.label}</span>${it.p}</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
+        const itStyle=ic.svg?'':`background:${ic.bg};color:${ic.fg}`;
+        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt pico" style="${itStyle}">${ic.svg?ic.svg():ic.label}</span>${it.p}</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
       });
       h+=`</div>`;
     });
