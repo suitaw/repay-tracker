@@ -287,9 +287,14 @@ body{
   </div>
 </div>
 </div>
-<div class="tgl">
+<div class="tgl" style="border-bottom:none;padding-bottom:2px">
   <button class="tgl-btn on" data-mode="active">仅待还</button>
   <button class="tgl-btn" data-mode="all">显示全部</button>
+</div>
+<div class="tgl" id="platformTgl" style="padding-top:2px">
+  <button class="tgl-btn on" data-platform="all">全部</button>
+  <button class="tgl-btn" data-platform="360">360借条</button>
+  <button class="tgl-btn" data-platform="meituan">美团</button>
 </div>
 <div class="nv" id="nv"></div>
 <div class="alert" id="alertBox" style="display:none"></div>
@@ -303,118 +308,120 @@ body{
 <div class="confetti" id="confetti"></div>
 <script>
 const D=[
-{d:"2026-07-17",a:94.54},
-{d:"2026-07-19",a:375.89},
-{d:"2026-07-22",a:236.34},
-{d:"2026-07-28",a:132.35},
-{d:"2026-08-01",a:236.33},
-{d:"2026-08-02",a:189.03},
-{d:"2026-08-03",a:94.83},
-{d:"2026-08-05",a:47.27},
-{d:"2026-08-10",a:47.27},
-{d:"2026-08-13",a:142.56},
-{d:"2026-08-14",a:170.16},
-{d:"2026-08-15",a:94.90},
-{d:"2026-08-17",a:326.28},
-{d:"2026-08-17",a:94.50},
-{d:"2026-08-19",a:375.89},
-{d:"2026-08-22",a:236.34},
-{d:"2026-08-28",a:132.35},
-{d:"2026-09-01",a:236.37},
-{d:"2026-09-03",a:94.25},
-{d:"2026-09-05",a:47.27},
-{d:"2026-09-10",a:47.27},
-{d:"2026-09-13",a:140.68},
-{d:"2026-09-14",a:170.16},
-{d:"2026-09-15",a:94.87},
-{d:"2026-09-17",a:283.60},
-{d:"2026-09-17",a:47.23},
-{d:"2026-09-19",a:375.89},
-{d:"2026-09-22",a:236.34},
-{d:"2026-09-28",a:132.35},
-{d:"2026-10-01",a:141.80},
-{d:"2026-10-03",a:93.54},
-{d:"2026-10-05",a:47.27},
-{d:"2026-10-10",a:47.27},
-{d:"2026-10-13",a:138.46},
-{d:"2026-10-14",a:170.16},
-{d:"2026-10-15",a:94.33},
-{d:"2026-10-17",a:283.60},
-{d:"2026-10-19",a:375.89},
-{d:"2026-10-22",a:236.26},
-{d:"2026-10-28",a:132.35},
-{d:"2026-11-01",a:141.80},
-{d:"2026-11-03",a:93.11},
-{d:"2026-11-05",a:47.27},
-{d:"2026-11-10",a:47.27},
-{d:"2026-11-13",a:136.85},
-{d:"2026-11-14",a:170.16},
-{d:"2026-11-15",a:94.81},
-{d:"2026-11-17",a:283.60},
-{d:"2026-11-19",a:375.89},
-{d:"2026-11-28",a:132.35},
-{d:"2026-12-01",a:141.80},
-{d:"2026-12-03",a:92.45},
-{d:"2026-12-05",a:47.27},
-{d:"2026-12-10",a:47.27},
-{d:"2026-12-13",a:134.74},
-{d:"2026-12-14",a:170.16},
-{d:"2026-12-15",a:94.38},
-{d:"2026-12-17",a:283.60},
-{d:"2026-12-19",a:375.89},
-{d:"2026-12-28",a:132.35},
-{d:"2027-01-01",a:141.80},
-{d:"2027-01-03",a:91.94},
-{d:"2027-01-05",a:47.27},
-{d:"2027-01-10",a:47.27},
-{d:"2027-01-13",a:133.00},
-{d:"2027-01-14",a:170.16},
-{d:"2027-01-15",a:94.75},
-{d:"2027-01-17",a:283.60},
-{d:"2027-01-19",a:375.89},
-{d:"2027-01-28",a:132.35},
-{d:"2027-02-01",a:141.80},
-{d:"2027-02-03",a:91.36},
-{d:"2027-02-05",a:47.27},
-{d:"2027-02-10",a:47.27},
-{d:"2027-02-13",a:131.39},
-{d:"2027-02-14",a:170.16},
-{d:"2027-02-15",a:94.72},
-{d:"2027-02-17",a:283.60},
-{d:"2027-02-19",a:375.89},
-{d:"2027-02-28",a:132.35},
-{d:"2027-03-01",a:141.80},
-{d:"2027-03-03",a:47.27},
-{d:"2027-03-05",a:47.27},
-{d:"2027-03-10",a:47.27},
-{d:"2027-03-14",a:170.16},
-{d:"2027-03-15",a:93.97},
-{d:"2027-03-17",a:283.60},
-{d:"2027-03-19",a:375.89},
-{d:"2027-03-28",a:132.35},
-{d:"2027-04-01",a:141.80},
-{d:"2027-04-03",a:47.23},
-{d:"2027-04-05",a:47.23},
-{d:"2027-04-10",a:47.27},
-{d:"2027-04-14",a:170.20},
-{d:"2027-04-15",a:94.65},
-{d:"2027-04-17",a:283.60},
-{d:"2027-04-19",a:375.89},
-{d:"2027-04-28",a:132.31},
-{d:"2027-05-10",a:47.23},
-{d:"2027-05-14",a:75.59},
-{d:"2027-05-15",a:94.50},
-{d:"2027-05-17",a:283.60},
-{d:"2027-05-19",a:375.93,t:"最后一期"},
-{d:"2027-06-15",a:94.64},
-{d:"2027-06-17",a:283.60},
-{d:"2027-07-17",a:283.51,t:"美团最后一期"}
+{d:"2026-07-17",a:94.54,p:"360"},
+{d:"2026-07-19",a:375.89,p:"360"},
+{d:"2026-07-22",a:236.34,p:"360"},
+{d:"2026-07-28",a:132.35,p:"360"},
+{d:"2026-08-01",a:236.33,p:"360"},
+{d:"2026-08-02",a:189.03,p:"360"},
+{d:"2026-08-03",a:94.83,p:"360"},
+{d:"2026-08-05",a:47.27,p:"360"},
+{d:"2026-08-10",a:47.27,p:"360"},
+{d:"2026-08-13",a:142.56,p:"360"},
+{d:"2026-08-14",a:170.16,p:"360"},
+{d:"2026-08-15",a:94.90,p:"360"},
+{d:"2026-08-17",a:326.28,p:"meituan"},
+{d:"2026-08-17",a:94.50,p:"360"},
+{d:"2026-08-19",a:375.89,p:"360"},
+{d:"2026-08-22",a:236.34,p:"360"},
+{d:"2026-08-28",a:132.35,p:"360"},
+{d:"2026-09-01",a:236.37,p:"360"},
+{d:"2026-09-03",a:94.25,p:"360"},
+{d:"2026-09-05",a:47.27,p:"360"},
+{d:"2026-09-10",a:47.27,p:"360"},
+{d:"2026-09-13",a:140.68,p:"360"},
+{d:"2026-09-14",a:170.16,p:"360"},
+{d:"2026-09-15",a:94.87,p:"360"},
+{d:"2026-09-17",a:283.60,p:"meituan"},
+{d:"2026-09-17",a:47.23,p:"360"},
+{d:"2026-09-19",a:375.89,p:"360"},
+{d:"2026-09-22",a:236.34,p:"360"},
+{d:"2026-09-28",a:132.35,p:"360"},
+{d:"2026-10-01",a:141.80,p:"360"},
+{d:"2026-10-03",a:93.54,p:"360"},
+{d:"2026-10-05",a:47.27,p:"360"},
+{d:"2026-10-10",a:47.27,p:"360"},
+{d:"2026-10-13",a:138.46,p:"360"},
+{d:"2026-10-14",a:170.16,p:"360"},
+{d:"2026-10-15",a:94.33,p:"360"},
+{d:"2026-10-17",a:283.60,p:"meituan"},
+{d:"2026-10-19",a:375.89,p:"360"},
+{d:"2026-10-22",a:236.26,p:"360"},
+{d:"2026-10-28",a:132.35,p:"360"},
+{d:"2026-11-01",a:141.80,p:"360"},
+{d:"2026-11-03",a:93.11,p:"360"},
+{d:"2026-11-05",a:47.27,p:"360"},
+{d:"2026-11-10",a:47.27,p:"360"},
+{d:"2026-11-13",a:136.85,p:"360"},
+{d:"2026-11-14",a:170.16,p:"360"},
+{d:"2026-11-15",a:94.81,p:"360"},
+{d:"2026-11-17",a:283.60,p:"meituan"},
+{d:"2026-11-19",a:375.89,p:"360"},
+{d:"2026-11-28",a:132.35,p:"360"},
+{d:"2026-12-01",a:141.80,p:"360"},
+{d:"2026-12-03",a:92.45,p:"360"},
+{d:"2026-12-05",a:47.27,p:"360"},
+{d:"2026-12-10",a:47.27,p:"360"},
+{d:"2026-12-13",a:134.74,p:"360"},
+{d:"2026-12-14",a:170.16,p:"360"},
+{d:"2026-12-15",a:94.38,p:"360"},
+{d:"2026-12-17",a:283.60,p:"meituan"},
+{d:"2026-12-19",a:375.89,p:"360"},
+{d:"2026-12-28",a:132.35,p:"360"},
+{d:"2027-01-01",a:141.80,p:"360"},
+{d:"2027-01-03",a:91.94,p:"360"},
+{d:"2027-01-05",a:47.27,p:"360"},
+{d:"2027-01-10",a:47.27,p:"360"},
+{d:"2027-01-13",a:133.00,p:"360"},
+{d:"2027-01-14",a:170.16,p:"360"},
+{d:"2027-01-15",a:94.75,p:"360"},
+{d:"2027-01-17",a:283.60,p:"meituan"},
+{d:"2027-01-19",a:375.89,p:"360"},
+{d:"2027-01-28",a:132.35,p:"360"},
+{d:"2027-02-01",a:141.80,p:"360"},
+{d:"2027-02-03",a:91.36,p:"360"},
+{d:"2027-02-05",a:47.27,p:"360"},
+{d:"2027-02-10",a:47.27,p:"360"},
+{d:"2027-02-13",a:131.39,p:"360"},
+{d:"2027-02-14",a:170.16,p:"360"},
+{d:"2027-02-15",a:94.72,p:"360"},
+{d:"2027-02-17",a:283.60,p:"meituan"},
+{d:"2027-02-19",a:375.89,p:"360"},
+{d:"2027-02-28",a:132.35,p:"360"},
+{d:"2027-03-01",a:141.80,p:"360"},
+{d:"2027-03-03",a:47.27,p:"360"},
+{d:"2027-03-05",a:47.27,p:"360"},
+{d:"2027-03-10",a:47.27,p:"360"},
+{d:"2027-03-14",a:170.16,p:"360"},
+{d:"2027-03-15",a:93.97,p:"360"},
+{d:"2027-03-17",a:283.60,p:"meituan"},
+{d:"2027-03-19",a:375.89,p:"360"},
+{d:"2027-03-28",a:132.35,p:"360"},
+{d:"2027-04-01",a:141.80,p:"360"},
+{d:"2027-04-03",a:47.23,p:"360"},
+{d:"2027-04-05",a:47.23,p:"360"},
+{d:"2027-04-10",a:47.27,p:"360"},
+{d:"2027-04-14",a:170.20,p:"360"},
+{d:"2027-04-15",a:94.65,p:"360"},
+{d:"2027-04-17",a:283.60,p:"meituan"},
+{d:"2027-04-19",a:375.89,p:"360"},
+{d:"2027-04-28",a:132.31,p:"360"},
+{d:"2027-05-10",a:47.23,p:"360"},
+{d:"2027-05-14",a:75.59,p:"360"},
+{d:"2027-05-15",a:94.50,p:"360"},
+{d:"2027-05-17",a:283.60,p:"meituan"},
+{d:"2027-05-19",a:375.93,t:"最后一期",p:"360"},
+{d:"2027-06-15",a:94.64,p:"360"},
+{d:"2027-06-17",a:283.60,p:"meituan"},
+{d:"2027-07-17",a:283.51,t:"美团最后一期",p:"meituan"}
 ];
 
 const WD=['日','一','二','三','四','五','六'];
 const TODAY=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')})();
 
 let viewMode='active';
+let platformMode='all';
+const PLATFORM_LABEL={"360":"360借条","meituan":"美团"};
 let theme=localStorage.getItem('po-theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 
 function applyTheme(){
@@ -584,6 +591,7 @@ function getStatus(it){
 }
 
 function shouldShow(it){
+  if(platformMode!=='all'&&it.p!==platformMode)return false;
   if(viewMode==='all')return true;
   const s=getStatus(it);
   if(s==='done'&&it.d<TODAY)return false;
@@ -597,14 +605,14 @@ function weekToMonth(weekStart){
 }
 
 // 未来 7 天还款清单
-function renderUpcoming(){
+function renderUpcoming(DP){
   const list=document.getElementById('upcomingList');
   const sub=document.getElementById('upcomingSub');
   // 从今天起算7天内（含今天）所有还款
   const endDate=new Date(TODAY+'T00:00:00');
   endDate.setDate(endDate.getDate()+6);
   const endStr=fmtDate(endDate);
-  const items=D.map((d,i)=>({...d,i})).filter(it=>it.d>=TODAY&&it.d<=endStr);
+  const items=DP.filter(it=>it.d>=TODAY&&it.d<=endStr);
   const totalUnpaid=items.filter(it=>!ck[it.i]).reduce((s,it)=>s+it.a,0);
   sub.textContent=items.length?`未还 ¥${totalUnpaid.toFixed(0)}`:'';
   if(items.length===0){
@@ -625,12 +633,13 @@ function renderUpcoming(){
 
 let lastRem=null,lastPaid=null;
 function updStats(animate){
-  const tot=D.reduce((s,d)=>s+d.a,0);
+  const DP=D.map((d,i)=>({...d,i})).filter(d=>platformMode==='all'||d.p===platformMode);
+  const tot=DP.reduce((s,d)=>s+d.a,0);
   let paid=0,pc=0;
-  D.forEach((d,i)=>{if(ck[i]){paid+=d.a;pc++}});
+  DP.forEach(d=>{if(ck[d.i]){paid+=d.a;pc++}});
   const rem=tot-paid,now=new Date(),cm=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
   let mTot=0,mPaid=0;
-  D.forEach((d,i)=>{if(gm(d.d)===cm){mTot+=d.a;if(ck[i])mPaid+=d.a}});
+  DP.forEach(d=>{if(gm(d.d)===cm){mTot+=d.a;if(ck[d.i])mPaid+=d.a}});
   const mRem=mTot-mPaid;
 
   const hAEl=document.getElementById('hA'),sPEl=document.getElementById('sP');
@@ -652,18 +661,18 @@ function updStats(animate){
   const weekEndD=new Date(weekStart+'T00:00:00');weekEndD.setDate(weekEndD.getDate()+6);
   const weekEnd=fmtDate(weekEndD);
   let wRem=0;
-  D.forEach((d,i)=>{if(!ck[i]&&d.d>=TODAY&&d.d<=weekEnd)wRem+=d.a});
+  DP.forEach(d=>{if(!ck[d.i]&&d.d>=TODAY&&d.d<=weekEnd)wRem+=d.a});
   document.getElementById('sW').textContent='¥'+wRem.toFixed(0);
   // 第三个卡：距结清天数 / 已完成
   const sCEl=document.getElementById('sC');
   const sCLabelEl=document.getElementById('sCLabel');
-  if(pc===D.length){
+  if(pc===DP.length){
     sCEl.textContent='✓';
     sCLabelEl.textContent='已结清';
   }else{
     // 找最后一笔未还的日期
     let lastDate=null;
-    for(let i=D.length-1;i>=0;i--){if(!ck[i]){lastDate=D[i].d;break}}
+    for(let i=DP.length-1;i>=0;i--){if(!ck[DP[i].i]){lastDate=DP[i].d;break}}
     if(lastDate){
       const days=Math.max(0,daysBetween(TODAY,lastDate));
       sCEl.textContent=days;
@@ -673,18 +682,18 @@ function updStats(animate){
       sCLabelEl.textContent='距结清';
     }
   }
-  const pct=paid/tot*100;
+  const pct=tot>0?paid/tot*100:0;
   document.getElementById('pB').style.width=pct+'%';
   document.getElementById('pP').textContent=pct.toFixed(1)+'%';
-  document.getElementById('pL').textContent=pc+'/'+D.length;
+  document.getElementById('pL').textContent=pc+'/'+DP.length;
 
   // 下一笔
   const np=document.getElementById('nextpay');
   const npInfo=document.getElementById('nextpayInfo');
   const npCheck=document.getElementById('npCheck');
   let nextItem=null;
-  for(let i=0;i<D.length;i++){
-    if(!ck[i]&&D[i].d>=TODAY){nextItem={...D[i],i};break}
+  for(const d of DP){
+    if(!ck[d.i]&&d.d>=TODAY){nextItem=d;break}
   }
   if(nextItem){
     const days=daysBetween(TODAY,nextItem.d);
@@ -702,7 +711,7 @@ function updStats(animate){
   }
 
   let overdueCount=0,overdueAmt=0;
-  D.forEach((d,i)=>{if(!ck[i]&&d.d<TODAY){overdueCount++;overdueAmt+=d.a}});
+  DP.forEach(d=>{if(!ck[d.i]&&d.d<TODAY){overdueCount++;overdueAmt+=d.a}});
   const ab=document.getElementById('alertBox');
   if(overdueCount>0){
     ab.style.display='block';
@@ -711,7 +720,7 @@ function updStats(animate){
     ab.style.display='none';
   }
 
-  renderUpcoming();
+  renderUpcoming(DP);
 }
 
 function render(animate){
@@ -767,7 +776,7 @@ function render(animate){
         if(status==='today')tag=`<span class="itg tt">今天</span>`;
         else if(status==='overdue')tag=`<span class="itg tov">逾期</span>`;
         else if(it.t)tag=`<span class="itg te">${it.t}</span>`;
-        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt"></span>360借条</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
+        h+=`<div class="${cls}" data-idx="${it.i}"><div class="ck${on?' on':''}"></div><div class="ib"><div class="itp"><span class="idt">${fm(it.d)}</span><span class="idy">周${wd}</span>${tag}</div><div class="is"><span class="dt"></span>${PLATFORM_LABEL[it.p]||it.p}</div></div><div class="ia">¥${it.a.toFixed(2)}</div></div>`;
       });
       h+=`</div>`;
     });
@@ -835,9 +844,17 @@ document.body.addEventListener('click',function(e){
     doUndo();
     return;
   }
+  const platformBtn=e.target.closest('#platformTgl .tgl-btn');
+  if(platformBtn){
+    document.querySelectorAll('#platformTgl .tgl-btn').forEach(b=>b.classList.remove('on'));
+    platformBtn.classList.add('on');
+    platformMode=platformBtn.dataset.platform;
+    render();
+    return;
+  }
   const tglBtn=e.target.closest('.tgl-btn');
   if(tglBtn){
-    document.querySelectorAll('.tgl-btn').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.tgl:not(#platformTgl) .tgl-btn').forEach(b=>b.classList.remove('on'));
     tglBtn.classList.add('on');
     viewMode=tglBtn.dataset.mode;
     render();
